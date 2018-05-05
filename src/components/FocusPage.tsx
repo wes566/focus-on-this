@@ -97,7 +97,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   public async componentDidMount() {
     // await this.readTodoFromStorage();
-    this.setState({ ...this.state, todoItem: "hi wes", isReadingStorage: false });
+    this.setState({ ...this.state, todoItem: "", isReadingStorage: false });
   }
 
   private onInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {

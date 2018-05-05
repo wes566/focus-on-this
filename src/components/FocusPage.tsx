@@ -1,6 +1,6 @@
-import * as localforage from "localforage";
 import * as React from "react";
 import styled from "styled-components";
+import { getItem, removeItem, saveItem } from "../storage";
 
 const PageContainer = styled.div`
   height: 100%;
@@ -109,14 +109,14 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   private onKeyUp = async (e: any) => {
     if (e.keyCode === 13) {
-      await localforage.setItem(ComponentConstants.TODO_KEY, this.state.text);
+      await saveItem(ComponentConstants.TODO_KEY, this.state.text);
       this.setState({ ...this.state, todoItem: this.state.text, text: "" });
     }
   };
 
   private async readTodoFromStorage() {
     try {
-      const todo = await localforage.getItem<string>(ComponentConstants.TODO_KEY);
+      const todo = await getItem<string>(ComponentConstants.TODO_KEY);
       this.setState({ ...this.state, isReadingStorage: false, todoItem: todo || "" });
     } catch (error) {
       // tslint:disable-next-line:no-console
@@ -126,7 +126,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
   }
 
   private async clearTodoFromStorage() {
-    await localforage.removeItem(ComponentConstants.TODO_KEY);
+    await removeItem(ComponentConstants.TODO_KEY);
   }
 
   private markTodoDone = async e => {

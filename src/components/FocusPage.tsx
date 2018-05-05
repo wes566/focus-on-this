@@ -1,6 +1,6 @@
+import * as localforage from "localforage";
 import * as React from "react";
 import styled from "styled-components";
-import * as localforage from "localforage";
 
 const PageContainer = styled.div`
   height: 100%;
@@ -9,7 +9,7 @@ const PageContainer = styled.div`
   align-items: stretch;
   justify-content: flex-start;
   flex: 1;
-  background: #111;
+  background: #000;
   color: #bbb;
 `;
 
@@ -20,7 +20,7 @@ const ToDoContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex: 1;
-  background: #111;
+  background: #000;
   color: #bbb;
   padding: 40;
 `;
@@ -119,6 +119,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
       const todo = await localforage.getItem<string>(ComponentConstants.TODO_KEY);
       this.setState({ ...this.state, isReadingStorage: false, todoItem: todo || "" });
     } catch (error) {
+      // tslint:disable-next-line:no-console
       console.error(error);
       this.setState({ ...this.state, isReadingStorage: false, todoItem: "" });
     }

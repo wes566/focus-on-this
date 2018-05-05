@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import * as localforage from "localforage";
 
 const PageContainer = styled.div`
   height: 100%;
@@ -68,9 +69,9 @@ interface IComponentState {
   showContext: boolean;
 }
 
-// enum ComponentConstants {
-//   TODO_KEY = "latestTodo"
-// }
+enum ComponentConstants {
+  TODO_KEY = "latestTodo"
+}
 
 export default class FocusPage extends React.Component<IComponentProps, IComponentState> {
   constructor(props: IComponentProps) {
@@ -96,7 +97,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
   }
 
   public async componentDidMount() {
-    // await this.readTodoFromStorage();
+    await this.readTodoFromStorage();
     this.setState({ ...this.state, todoItem: "", isReadingStorage: false });
   }
 
@@ -108,29 +109,29 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   private onKeyUp = async (e: any) => {
     if (e.keyCode === 13) {
-      // await AsyncStorage.setItem(this.todoKey, this.state.text);
+      await localforage.setItem(ComponentConstants.TODO_KEY, this.state.text);
       this.setState({ ...this.state, todoItem: this.state.text, text: "" });
     }
   };
 
-  // private async readTodoFromStorage() {
-  //   try {
-  //     const todo = await AsyncStorage.getItem(this.todoKey);
-  //     this.setState({ ...this.state, readingStorage: false, todoItem: todo || "" });
-  //   } catch (error) {
-  //     console.error(error);
-  //     this.setState({ ...this.state, readingStorage: false, todoItem: "" });
-  //   }
-  // }
+  private async readTodoFromStorage() {
+    try {
+      const todo = await localforage.getItem<string>(ComponentConstants.TODO_KEY);
+      this.setState({ ...this.state, isReadingStorage: false, todoItem: todo || "" });
+    } catch (error) {
+      console.error(error);
+      this.setState({ ...this.state, isReadingStorage: false, todoItem: "" });
+    }
+  }
 
-  // private async clearTodoFromStorage() {
-  //   await AsyncStorage.removeItem(this.todoKey);
-  // }
+  private async clearTodoFromStorage() {
+    await localforage.removeItem(ComponentConstants.TODO_KEY);
+  }
 
   private markTodoDone = async e => {
     e.preventDefault();
     this.setState({ ...this.state, text: "", todoItem: "", showContext: false });
-    // await this.clearTodoFromStorage();
+    await this.clearTodoFromStorage();
   };
 
   private toggleContext = e => {

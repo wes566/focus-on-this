@@ -6,6 +6,7 @@ const PageContainer = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,6 +20,7 @@ const PageContainer = styled.div`
 const ToDoContainer = styled.div`
   height: 100%;
   width: 100%;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;

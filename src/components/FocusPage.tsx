@@ -6,9 +6,10 @@ const PageContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   flex: 1;
+  padding-top: 50;
   background: #000;
   color: #bbb;
 `;
@@ -31,7 +32,9 @@ const Footer = styled.div`
 
 const Input = styled.input`
   padding: 0.5em;
-  margin: 0.5em;
+  text-align: center;
+  min-width: 50%;
+  margin: 2.0em;
   border: none;
   border-radius: 3px;
   border-bottom-color: "gray";
@@ -43,7 +46,7 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  background: #999;
+  background: #fff;
   color: #bbb;
   font-size: 1em;
   margin: 1em;
@@ -57,6 +60,12 @@ const Text = styled.text`
   font-size: 24;
   margin-top: 30;
   padding-bottom: 20;
+  cursor: default;
+`;
+
+const InstructionText = styled.text`
+  color: "#bbb";
+  font-size: 42;
   cursor: default;
 `;
 
@@ -98,7 +107,6 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   public async componentDidMount() {
     await this.readTodoFromStorage();
-    this.setState({ ...this.state, todoItem: "", isReadingStorage: false });
   }
 
   private onInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,7 +150,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
   private renderInputTodo() {
     return (
       <PageContainer>
-        <p>{`What one thing do you want to focus on right now?`}</p>
+        <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
         <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
       </PageContainer>
     );

@@ -41,31 +41,31 @@ const Input = styled.input`
   border-bottom-width: 0;
   border-color: "#bbb";
   color: "#fff";
-  padding: 10;
-  font-size: 24;
+  padding: 10px;
+  font-size: 24px;
 `;
 
 const Button = styled.button`
   background: #fff;
-  color: #bbb;
+  color: #000;
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
   border: 1px solid #bbb;
-  border-radius: 3px;
+  border-radius: 1px;
 `;
 
 const Text = styled.text`
   color: "#bbb";
-  font-size: 24;
-  margin-top: 30;
-  padding-bottom: 20;
+  font-size: 24px;
+  margin-top: 30px;
+  padding-bottom: 20px;
   cursor: default;
 `;
 
 const InstructionText = styled.text`
   color: "#bbb";
-  font-size: 42;
+  font-size: 24px;
   cursor: default;
 `;
 

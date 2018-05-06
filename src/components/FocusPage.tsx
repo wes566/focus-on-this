@@ -4,6 +4,7 @@ import { getItem, removeItem, saveItem } from "../storage";
 
 const PageContainer = styled.div`
   height: 100%;
+  width: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -68,6 +69,7 @@ const InstructionText = styled.text`
   color: "#bbb";
   font-size: 24px;
   cursor: default;
+  text-align: center;
 `;
 
 interface IComponentProps {}
@@ -110,6 +112,10 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
     await this.readTodoFromStorage();
   }
 
+  private onTouchMoved = e => {
+    e.preventDefault();
+  };
+
   private onInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault(); // TODO: do I need to call this?
     const newText = (e.target && e.target.value) || "";
@@ -150,7 +156,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   private renderInputTodo() {
     return (
-      <PageContainer>
+      <PageContainer onTouchMove={this.onTouchMoved}>
         <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
         <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
       </PageContainer>
@@ -159,8 +165,8 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   private renderTodo() {
     return (
-      <ToDoContainer onMouseUp={this.toggleContext}>
-        <Text>{this.state.todoItem}</Text>
+      <ToDoContainer onTouchMove={this.onTouchMoved}>
+        <Text onClick={this.toggleContext}>{this.state.todoItem}</Text>
         <Footer>
           <div style={{ opacity: this.state.showContext ? 1 : 0 }}>
             <Button onClick={this.markTodoDone}>done</Button>
@@ -172,7 +178,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   private renderLoading() {
     return (
-      <PageContainer>
+      <PageContainer onTouchMove={this.onTouchMoved}>
         <p>Loading...</p>
       </PageContainer>
     );

@@ -4,12 +4,13 @@ import { getItem, removeItem, saveItem } from "../storage";
 
 const PageContainer = styled.div`
   height: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex: 1;
-  padding-top: 50;
+  padding-top: 50px;
   background: #000;
   color: #bbb;
 `;
@@ -34,7 +35,7 @@ const Input = styled.input`
   padding: 0.5em;
   text-align: center;
   min-width: 50%;
-  margin: 2.0em;
+  margin: 2em;
   border: none;
   border-radius: 3px;
   border-bottom-color: "gray";

@@ -7,10 +7,12 @@ A stupid simple way to focus on one thing at a time.
 <br />
 <br />
 
-## To deploy
+
+## Contributing
 
 [![Build Status](https://travis-ci.com/wes566/focus-on-this.svg?branch=master)](https://travis-ci.com/wes566/focus-on-this)
 
+### To deploy
 ```
 yarn deploy
 ```

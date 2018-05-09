@@ -9,6 +9,8 @@ A stupid simple way to focus on one thing at a time.
 
 ## To deploy
 
+[![Build Status](https://travis-ci.com/wes566/focus-on-this.svg?branch=master)](https://travis-ci.com/wes566/focus-on-this)
+
 ```
 yarn deploy
 ```

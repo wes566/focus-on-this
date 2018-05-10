@@ -2,7 +2,7 @@
   "name": "react-ts-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://wes566.github.io/focus-on-this",
+  "homepage": "https://focusonthis.io",
   "dependencies": {
     "localforage": "1.7.1",
     "react": "16.3.2",

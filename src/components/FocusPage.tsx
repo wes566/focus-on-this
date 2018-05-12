@@ -13,8 +13,6 @@ const PageContainer = styled.div`
   justify-content: flex-start;
   flex: 1;
   padding-top: 50px;
-  background: #000;
-  color: #bbb;
 `;
 
 const ToDoContainer = styled.div`
@@ -26,8 +24,6 @@ const ToDoContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex: 1;
-  background: #000;
-  color: #bbb;
   padding: 40;
 `;
 
@@ -42,17 +38,12 @@ const Input = styled.input`
   margin: 2em;
   border: none;
   border-radius: 3px;
-  border-bottom-color: "gray";
   border-bottom-width: 0;
-  border-color: "#bbb";
-  color: "#fff";
   padding: 10px;
   font-size: 24px;
 `;
 
 const Button = styled.button`
-  background: #fff;
-  color: #000;
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
@@ -61,7 +52,6 @@ const Button = styled.button`
 `;
 
 const Text = styled.text`
-  color: "#bbb";
   font-size: 24px;
   margin-top: 30px;
   padding-bottom: 20px;
@@ -69,7 +59,6 @@ const Text = styled.text`
 `;
 
 const InstructionText = styled.text`
-  color: "#bbb";
   font-size: 24px;
   cursor: default;
   text-align: center;

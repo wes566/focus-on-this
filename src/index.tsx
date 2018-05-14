@@ -13,23 +13,8 @@ import registerServiceWorker from "./registerServiceWorker";
 
 const theme = createMuiTheme({
   palette: {
-    primary: indigo,
-    secondary: grey
-  },
-  typography: {
-    // Use the system font instead of the default Roboto font.
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(",")
+    primary: grey,
+    secondary: indigo
   }
 });
 
@@ -37,6 +22,7 @@ const theme = createMuiTheme({
 injectGlobal`
 body {
   position: fixed;
+  font-family: roboto,sans-serif;
 }
 `;
 

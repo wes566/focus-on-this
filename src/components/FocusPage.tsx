@@ -1,3 +1,5 @@
+import Icon from "material-ui/Icon";
+import Zoom from "material-ui/transitions/Zoom";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
@@ -25,6 +27,7 @@ const ToDoContainer = styled.div`
   justify-content: center;
   flex: 1;
   padding: 40;
+  background-color: #21b6a8;
 `;
 
 const Footer = styled.div`
@@ -55,6 +58,7 @@ const Text = styled.text`
   font-size: 24px;
   margin-top: 30px;
   padding-bottom: 20px;
+  color: pink;
   cursor: default;
 `;
 
@@ -71,6 +75,7 @@ interface IComponentState {
   todoItem: string;
   isReadingStorage: boolean;
   showContext: boolean;
+  showButton: boolean;
 }
 
 enum ComponentConstants {
@@ -84,7 +89,8 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
       text: "",
       todoItem: "",
       isReadingStorage: true,
-      showContext: false
+      showContext: false,
+      showButton: false
     };
   }
 
@@ -102,6 +108,12 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   public async componentDidMount() {
     await this.readTodoFromStorage();
+
+    setInterval(() => {
+      // tslint:disable-next-line:no-console
+      console.log("timer hit");
+      this.setState({ ...this.state, showButton: !this.state.showButton });
+    }, 1000);
   }
 
   private onTouchMoved = e => {
@@ -151,6 +163,22 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
       <PageContainer onTouchMove={this.onTouchMoved}>
         <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
         <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
+        <Zoom in={this.state.showButton}>
+          <div>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          </div>
+        </Zoom>
       </PageContainer>
     );
   }

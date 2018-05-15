@@ -158,27 +158,33 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
     this.setState({ ...this.state, showContext: !this.state.showContext });
   };
 
+  private renderPaws() {
+    return (
+      <Zoom in={this.state.showButton}>
+        <div>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+          <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
+        </div>
+      </Zoom>
+    );
+  }
+
   private renderInputTodo() {
     return (
       <PageContainer onTouchMove={this.onTouchMoved}>
         <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
         <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
-        <Zoom in={this.state.showButton}>
-          <div>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-            <Icon style={{ fontSize: "84px", color: "pink" }}>pets</Icon>
-          </div>
-        </Zoom>
+        {this.renderPaws()}
       </PageContainer>
     );
   }
@@ -187,6 +193,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
     return (
       <ToDoContainer onTouchMove={this.onTouchMoved}>
         <Text onClick={this.toggleContext}>{this.state.todoItem}</Text>
+        {this.renderPaws()}
         <Footer>
           <div style={{ opacity: this.state.showContext ? 1 : 0 }}>
             <Button onClick={this.markTodoDone}>done</Button>

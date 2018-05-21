@@ -1,24 +1,10 @@
+import Icon from "material-ui/Icon";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
-
-const PageContainer = styled.div`
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  flex: 1;
-  padding-top: 50px;
-`;
+import { PageContainer } from "../styles";
 
 const ToDoContainer = styled.div`
-  height: 100%;
-  width: 100%;
-  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,14 +37,14 @@ const Button = styled.button`
   border-radius: 1px;
 `;
 
-const Text = styled.text`
+const Text = styled.div`
   font-size: 24px;
   margin-top: 30px;
   padding-bottom: 20px;
   cursor: default;
 `;
 
-const InstructionText = styled.text`
+const InstructionText = styled.div`
   font-size: 24px;
   cursor: default;
   text-align: center;
@@ -104,10 +90,6 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
     await this.readTodoFromStorage();
   }
 
-  private onTouchMoved = e => {
-    e.preventDefault();
-  };
-
   private onInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault(); // TODO: do I need to call this?
     const newText = (e.target && e.target.value) || "";
@@ -148,29 +130,32 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   private renderInputTodo() {
     return (
-      <PageContainer onTouchMove={this.onTouchMoved}>
+      <PageContainer>
         <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
         <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
+        <Icon style={{ fontSize: "84px" }}>arrow_forward</Icon>
       </PageContainer>
     );
   }
 
   private renderTodo() {
     return (
-      <ToDoContainer onTouchMove={this.onTouchMoved}>
-        <Text onClick={this.toggleContext}>{this.state.todoItem}</Text>
-        <Footer>
-          <div style={{ opacity: this.state.showContext ? 1 : 0 }}>
-            <Button onClick={this.markTodoDone}>done</Button>
-          </div>
-        </Footer>
-      </ToDoContainer>
+      <PageContainer>
+        <ToDoContainer>
+          <Text onClick={this.toggleContext}>{this.state.todoItem}</Text>
+          <Footer>
+            <div style={{ opacity: this.state.showContext ? 1 : 0 }}>
+              <Button onClick={this.markTodoDone}>done</Button>
+            </div>
+          </Footer>
+        </ToDoContainer>
+      </PageContainer>
     );
   }
 
   private renderLoading() {
     return (
-      <PageContainer onTouchMove={this.onTouchMoved}>
+      <PageContainer>
         <p>Loading...</p>
       </PageContainer>
     );

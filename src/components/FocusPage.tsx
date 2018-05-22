@@ -41,14 +41,6 @@ const Input = styled.input`
   font-size: 24px;
 `;
 
-// const Button = styled.button`
-//   font-size: 1em;
-//   margin: 1em;
-//   padding: 0.25em 1em;
-//   border: 1px solid #bbb;
-//   border-radius: 1px;
-// `;
-
 const Text = styled.div`
   font-size: 24px;
   margin-top: 30px;
@@ -62,11 +54,6 @@ const HintText = styled.div`
   opacity: 0.5;
   cursor: default;
 `;
-
-// const ButtonText = styled.div`
-//   font-size: 24px;
-//   color: #fafafa;
-// `;
 
 const InstructionText = styled.div`
   font-size: 24px;
@@ -161,20 +148,10 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
       <PageContainer>
         <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
         <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
-        <Button variant="fab" color="primary" aria-label="ok" onSubmit={this.handleToDoEntered}>
+        <Button variant="fab" color="primary" aria-label="ok" onClick={this.handleToDoEntered}>
           <ArrowForward />
         </Button>
         <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
-        {/* <ActionButton>
-          <ButtonText>
-            <div>
-              <span>OK</span>
-              <span style={{ paddingLeft: "10px" }}>
-                <Done style={{ color: "#fafafa" }} />
-              </span>
-            </div>
-          </ButtonText>
-        </ActionButton> */}
       </PageContainer>
     );
   }

@@ -1,4 +1,6 @@
-import Icon from "material-ui/Icon";
+import Button from "@material-ui/core/Button";
+import ArrowForward from "@material-ui/icons/ArrowForward";
+import Done from "@material-ui/icons/Done";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
@@ -11,6 +13,16 @@ const ToDoContainer = styled.div`
   justify-content: center;
   flex: 1;
   padding: 40;
+`;
+
+const ActionButton = styled(Button)`
+  background: linear-gradient(45deg, #828282 10%, #2c4ba9 90%);
+  border-radius: 10px;
+  border: 0;
+  color: #fafafa;
+  height: 48px;
+  padding: 0 30px;
+  box-shadow: 0 3px 5px 2px;
 `;
 
 const Footer = styled.div`
@@ -29,13 +41,13 @@ const Input = styled.input`
   font-size: 24px;
 `;
 
-const Button = styled.button`
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 1px solid #bbb;
-  border-radius: 1px;
-`;
+// const Button = styled.button`
+//   font-size: 1em;
+//   margin: 1em;
+//   padding: 0.25em 1em;
+//   border: 1px solid #bbb;
+//   border-radius: 1px;
+// `;
 
 const Text = styled.div`
   font-size: 24px;
@@ -43,6 +55,18 @@ const Text = styled.div`
   padding-bottom: 20px;
   cursor: default;
 `;
+
+const HintText = styled.div`
+  font-size: 16px;
+  color: #fafafa;
+  opacity: 0.5;
+  cursor: default;
+`;
+
+// const ButtonText = styled.div`
+//   font-size: 24px;
+//   color: #fafafa;
+// `;
 
 const InstructionText = styled.div`
   font-size: 24px;
@@ -98,9 +122,13 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   private onKeyUp = async (e: any) => {
     if (e.keyCode === 13) {
-      await saveItem(ComponentConstants.TODO_KEY, this.state.text);
-      this.setState({ ...this.state, todoItem: this.state.text, text: "" });
+      await this.handleToDoEntered(e);
     }
+  };
+
+  private handleToDoEntered = async (e: any) => {
+    await saveItem(ComponentConstants.TODO_KEY, this.state.text);
+    this.setState({ ...this.state, todoItem: this.state.text, text: "" });
   };
 
   private async readTodoFromStorage() {
@@ -133,7 +161,20 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
       <PageContainer>
         <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
         <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
-        <Icon style={{ fontSize: "84px" }}>arrow_forward</Icon>
+        <Button variant="fab" color="primary" aria-label="ok" onSubmit={this.handleToDoEntered}>
+          <ArrowForward />
+        </Button>
+        <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
+        {/* <ActionButton>
+          <ButtonText>
+            <div>
+              <span>OK</span>
+              <span style={{ paddingLeft: "10px" }}>
+                <Done style={{ color: "#fafafa" }} />
+              </span>
+            </div>
+          </ButtonText>
+        </ActionButton> */}
       </PageContainer>
     );
   }
@@ -145,7 +186,14 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
           <Text onClick={this.toggleContext}>{this.state.todoItem}</Text>
           <Footer>
             <div style={{ opacity: this.state.showContext ? 1 : 0 }}>
-              <Button onClick={this.markTodoDone}>done</Button>
+              <ActionButton onClick={this.markTodoDone}>
+                <div>
+                  <span>done</span>
+                  <span>
+                    <Done color="primary" />
+                  </span>
+                </div>
+              </ActionButton>
             </div>
           </Footer>
         </ToDoContainer>

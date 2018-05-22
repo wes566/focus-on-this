@@ -4,8 +4,9 @@
   "private": true,
   "homepage": "https://focusonthis.io",
   "dependencies": {
+    "@material-ui/core": "^1.0.0",
+    "@material-ui/icons": "^1.0.0",
     "localforage": "1.7.1",
-    "material-ui": "^1.0.0-beta.47",
     "react": "16.3.2",
     "react-app-rewire-hot-loader": "1.0.1",
     "react-dom": "16.3.2",

@@ -7,21 +7,16 @@ import { injectGlobal, ThemeProvider } from "styled-components";
 import registerServiceWorker from "./registerServiceWorker";
 
 const theme = {
-  colorBackground: "whitesmoke",
-  colorTextDefault: "darkslategray"
+  colorBackground: "#1f1f1f",
+  colorTextDefault: "#fafafa"
 };
 
 // tslint:disable-next-line:no-unused-expression
 injectGlobal`
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  height: 100%;
-}
-html,
-#root {
-  height: 100%;
+  position: fixed;
+  font-family: roboto,sans-serif;
+  margin: 0px;
 }
 `;
 

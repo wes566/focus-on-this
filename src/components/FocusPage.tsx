@@ -1,38 +1,30 @@
+import Button from "@material-ui/core/Button";
+import ArrowForward from "@material-ui/icons/ArrowForward";
+import Done from "@material-ui/icons/Done";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
-
-const PageContainer = styled.div`
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  flex: 1;
-  padding-top: 50px;
-  background: #000;
-  color: #bbb;
-`;
+import { PageContainer } from "../styles";
 
 const ToDoContainer = styled.div`
-  height: 100%;
-  width: 100%;
-  position: fixed;
+  display: flex;
+  justify-content: center;
+`;
+
+const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  flex: 1;
-  background: #000;
-  color: #bbb;
-  padding: 40;
+  align-items: center;
+  padding-top: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const Footer = styled.div`
   display: flex;
+  justify-content: flex-end;
+  padding: 20px;
 `;
 
 const Input = styled.input`
@@ -42,34 +34,26 @@ const Input = styled.input`
   margin: 2em;
   border: none;
   border-radius: 3px;
-  border-bottom-color: "gray";
   border-bottom-width: 0;
-  border-color: "#bbb";
-  color: "#fff";
   padding: 10px;
   font-size: 24px;
 `;
 
-const Button = styled.button`
-  background: #fff;
-  color: #000;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 1px solid #bbb;
-  border-radius: 1px;
-`;
-
-const Text = styled.text`
-  color: "#bbb";
+const Text = styled.div`
   font-size: 24px;
   margin-top: 30px;
   padding-bottom: 20px;
   cursor: default;
 `;
 
-const InstructionText = styled.text`
-  color: "#bbb";
+const HintText = styled.div`
+  font-size: 16px;
+  color: #fafafa;
+  opacity: 0.5;
+  cursor: default;
+`;
+
+const InstructionText = styled.div`
   font-size: 24px;
   cursor: default;
   text-align: center;
@@ -115,10 +99,6 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
     await this.readTodoFromStorage();
   }
 
-  private onTouchMoved = e => {
-    e.preventDefault();
-  };
-
   private onInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault(); // TODO: do I need to call this?
     const newText = (e.target && e.target.value) || "";
@@ -127,9 +107,13 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   private onKeyUp = async (e: any) => {
     if (e.keyCode === 13) {
-      await saveItem(ComponentConstants.TODO_KEY, this.state.text);
-      this.setState({ ...this.state, todoItem: this.state.text, text: "" });
+      await this.handleToDoEntered(e);
     }
+  };
+
+  private handleToDoEntered = async (e: any) => {
+    await saveItem(ComponentConstants.TODO_KEY, this.state.text);
+    this.setState({ ...this.state, todoItem: this.state.text, text: "" });
   };
 
   private async readTodoFromStorage() {
@@ -159,29 +143,38 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   private renderInputTodo() {
     return (
-      <PageContainer onTouchMove={this.onTouchMoved}>
-        <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
-        <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
+      <PageContainer>
+        <InputContainer>
+          <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
+          <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
+          <Button variant="fab" color="primary" aria-label="ok" onClick={this.handleToDoEntered}>
+            <ArrowForward />
+          </Button>
+          <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
+        </InputContainer>
       </PageContainer>
     );
   }
 
   private renderTodo() {
     return (
-      <ToDoContainer onTouchMove={this.onTouchMoved}>
-        <Text onClick={this.toggleContext}>{this.state.todoItem}</Text>
+      <PageContainer>
+        <div />
+        <ToDoContainer>
+          <Text onClick={this.toggleContext}>{this.state.todoItem}</Text>
+        </ToDoContainer>
         <Footer>
-          <div style={{ opacity: this.state.showContext ? 1 : 0 }}>
-            <Button onClick={this.markTodoDone}>done</Button>
-          </div>
+          <Button variant="fab" color="primary" aria-label="done" onClick={this.markTodoDone}>
+            <Done />
+          </Button>
         </Footer>
-      </ToDoContainer>
+      </PageContainer>
     );
   }
 
   private renderLoading() {
     return (
-      <PageContainer onTouchMove={this.onTouchMoved}>
+      <PageContainer>
         <p>Loading...</p>
       </PageContainer>
     );

@@ -1,4 +1,5 @@
 import Button from "@material-ui/core/Button";
+import Fade from "@material-ui/core/Fade";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import Done from "@material-ui/icons/Done";
 import * as React from "react";
@@ -72,6 +73,8 @@ enum ComponentConstants {
   TODO_KEY = "latestTodo"
 }
 
+const SlowFadeTimeout: number = 3000;
+
 export default class FocusPage extends React.Component<IComponentProps, IComponentState> {
   constructor(props: IComponentProps) {
     super(props);
@@ -142,15 +145,21 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
   };
 
   private renderInputTodo() {
+    const hasText = !!this.state.text && this.state.text !== "";
+
     return (
       <PageContainer>
         <InputContainer>
           <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
           <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
-          <Button variant="fab" color="primary" aria-label="ok" onClick={this.handleToDoEntered}>
-            <ArrowForward />
-          </Button>
-          <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
+          <Fade in={hasText}>
+            <Button variant="fab" color="primary" aria-label="ok" onClick={this.handleToDoEntered}>
+              <ArrowForward />
+            </Button>
+          </Fade>
+          <Fade in={hasText} timeout={hasText ? SlowFadeTimeout : 0}>
+            <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
+          </Fade>
         </InputContainer>
       </PageContainer>
     );
@@ -161,13 +170,17 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
       <PageContainer>
         <div />
         <ToDoContainer>
-          <Text onClick={this.toggleContext}>{this.state.todoItem}</Text>
+          <Fade in={true}>
+            <Text onClick={this.toggleContext}>{this.state.todoItem}</Text>
+          </Fade>
         </ToDoContainer>
-        <Footer>
-          <Button variant="fab" color="primary" aria-label="done" onClick={this.markTodoDone}>
-            <Done />
-          </Button>
-        </Footer>
+        <Fade in={true} timeout={SlowFadeTimeout}>
+          <Footer>
+            <Button variant="fab" color="primary" aria-label="done" onClick={this.markTodoDone}>
+              <Done />
+            </Button>
+          </Footer>
+        </Fade>
       </PageContainer>
     );
   }

@@ -1,7 +1,10 @@
+// icon list at https://material.io/tools/icons
 import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
+import Modal from "@material-ui/core/Modal";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import Done from "@material-ui/icons/Done";
+import HelpOutline from "@material-ui/icons/HelpOutline";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
@@ -17,9 +20,13 @@ const InputContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 70px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 20px;
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-self: stretch;
 `;
 
 const Footer = styled.div`
@@ -66,7 +73,7 @@ interface IComponentState {
   text: string;
   todoItem: string;
   isReadingStorage: boolean;
-  showContext: boolean;
+  showInfo: boolean;
 }
 
 enum ComponentConstants {
@@ -78,12 +85,7 @@ const SlowFadeTimeout: number = 3000;
 export default class FocusPage extends React.Component<IComponentProps, IComponentState> {
   constructor(props: IComponentProps) {
     super(props);
-    this.state = {
-      text: "",
-      todoItem: "",
-      isReadingStorage: true,
-      showContext: false
-    };
+    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false };
   }
 
   public render() {
@@ -136,32 +138,51 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   private markTodoDone = async e => {
     e.preventDefault();
-    this.setState({ ...this.state, text: "", todoItem: "", showContext: false });
+    this.setState({ ...this.state, text: "", todoItem: "" });
     await this.clearTodoFromStorage();
   };
 
-  private toggleContext = e => {
-    this.setState({ ...this.state, showContext: !this.state.showContext });
+  private showInfo = () => {
+    this.setState({ ...this.state, showInfo: true });
+  };
+
+  private hideInfo = () => {
+    this.setState({ ...this.state, showInfo: false });
   };
 
   private renderInputTodo() {
     const hasText = !!this.state.text && this.state.text !== "";
 
     return (
-      <PageContainer>
-        <InputContainer>
-          <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
-          <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
-          <Fade in={hasText}>
-            <Button variant="fab" color="primary" aria-label="ok" onClick={this.handleToDoEntered}>
-              <ArrowForward />
-            </Button>
-          </Fade>
-          <Fade in={hasText} timeout={hasText ? SlowFadeTimeout : 0}>
-            <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
-          </Fade>
-        </InputContainer>
-      </PageContainer>
+      <div>
+        <PageContainer>
+          <InputContainer>
+            <InfoContainer>
+              <HelpOutline onClick={this.showInfo} />
+              {/* <Button variant="fab" color="inherit" aria-label="info" onClick={this.showInfo}>
+              <PriorityHigh />
+            </Button> */}
+            </InfoContainer>
+            <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
+            <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
+            <Fade in={hasText}>
+              <Button variant="fab" color="primary" aria-label="ok" onClick={this.handleToDoEntered}>
+                <ArrowForward />
+              </Button>
+            </Fade>
+            <Fade in={hasText} timeout={hasText ? SlowFadeTimeout : 0}>
+              <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
+            </Fade>
+          </InputContainer>
+        </PageContainer>
+        <Modal open={this.state.showInfo} onClose={this.hideInfo}>
+          <div style={{ display: "flex", flexDirection:"column", backgroundColor: "white"}}>
+            <div>
+              What is this thing?
+            </div>
+          </div>
+        </Modal>
+      </div>
     );
   }
 
@@ -171,7 +192,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
         <div />
         <ToDoContainer>
           <Fade in={true}>
-            <Text onClick={this.toggleContext}>{this.state.todoItem}</Text>
+            <Text>{this.state.todoItem}</Text>
           </Fade>
         </ToDoContainer>
         <Fade in={true} timeout={SlowFadeTimeout}>

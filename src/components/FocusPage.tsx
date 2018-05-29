@@ -143,7 +143,8 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
   };
 
   private showInfo = () => {
-    this.setState({ ...this.state, showInfo: true });
+    // this.setState({ ...this.state, showInfo: true });
+    alert("Instructions on how to use this coming soon");
   };
 
   private hideInfo = () => {

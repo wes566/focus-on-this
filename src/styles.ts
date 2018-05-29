@@ -22,8 +22,7 @@ export const PageContainer = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: stretch;
+  justify-content: space-between;
   flex: 1;
-  padding-top: 50px;
 `;

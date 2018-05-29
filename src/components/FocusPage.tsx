@@ -8,25 +8,23 @@ import { PageContainer } from "../styles";
 
 const ToDoContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  flex: 1;
-  padding: 40;
 `;
 
-const ActionButton = styled(Button)`
-  background: linear-gradient(45deg, #828282 10%, #2c4ba9 90%);
-  border-radius: 10px;
-  border: 0;
-  color: #fafafa;
-  height: 48px;
-  padding: 0 30px;
-  box-shadow: 0 3px 5px 2px;
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const Footer = styled.div`
   display: flex;
+  justify-content: flex-end;
+  padding: 20px;
 `;
 
 const Input = styled.input`
@@ -146,12 +144,14 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
   private renderInputTodo() {
     return (
       <PageContainer>
-        <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
-        <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
-        <Button variant="fab" color="primary" aria-label="ok" onClick={this.handleToDoEntered}>
-          <ArrowForward />
-        </Button>
-        <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
+        <InputContainer>
+          <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
+          <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
+          <Button variant="fab" color="primary" aria-label="ok" onClick={this.handleToDoEntered}>
+            <ArrowForward />
+          </Button>
+          <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
+        </InputContainer>
       </PageContainer>
     );
   }
@@ -159,21 +159,15 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
   private renderTodo() {
     return (
       <PageContainer>
+        <div />
         <ToDoContainer>
           <Text onClick={this.toggleContext}>{this.state.todoItem}</Text>
-          <Footer>
-            <div style={{ opacity: this.state.showContext ? 1 : 0 }}>
-              <ActionButton onClick={this.markTodoDone}>
-                <div>
-                  <span>done</span>
-                  <span>
-                    <Done color="primary" />
-                  </span>
-                </div>
-              </ActionButton>
-            </div>
-          </Footer>
         </ToDoContainer>
+        <Footer>
+          <Button variant="fab" color="primary" aria-label="done" onClick={this.markTodoDone}>
+            <Done />
+          </Button>
+        </Footer>
       </PageContainer>
     );
   }

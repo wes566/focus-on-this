@@ -1,14 +1,23 @@
 // icon list at https://material.io/tools/icons
+import AppBar from "@material-ui/core/AppBar/AppBar";
 import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
 import Fade from "@material-ui/core/Fade";
-import Modal from "@material-ui/core/Modal";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import Slide from "@material-ui/core/Slide";
+import Tab from "@material-ui/core/Tab/Tab";
+import Tabs from "@material-ui/core/Tabs/Tabs";
+import Toolbar from "@material-ui/core/Toolbar/Toolbar";
+import Typography from "@material-ui/core/Typography/Typography";
 import ArrowForward from "@material-ui/icons/ArrowForward";
+import Close from "@material-ui/icons/Close";
 import Done from "@material-ui/icons/Done";
 import HelpOutline from "@material-ui/icons/HelpOutline";
+import Info from "@material-ui/icons/Info";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
-import { PageContainer } from "../styles";
+import { AccentColor, PageContainer, PrimaryForegroundColor } from "../styles";
 
 const ToDoContainer = styled.div`
   display: flex;
@@ -74,6 +83,7 @@ interface IComponentState {
   todoItem: string;
   isReadingStorage: boolean;
   showInfo: boolean;
+  infoTabValue: number;
 }
 
 enum ComponentConstants {
@@ -82,10 +92,14 @@ enum ComponentConstants {
 
 const SlowFadeTimeout: number = 3000;
 
+function slideUpTransition(props) {
+  return <Slide direction="up" {...props} />;
+}
+
 export default class FocusPage extends React.Component<IComponentProps, IComponentState> {
   constructor(props: IComponentProps) {
     super(props);
-    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false };
+    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false, infoTabValue: 0 };
   }
 
   public render() {
@@ -143,12 +157,15 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
   };
 
   private showInfo = () => {
-    // this.setState({ ...this.state, showInfo: true });
-    alert("Instructions on how to use this coming soon");
+    this.setState({ ...this.state, showInfo: true });
   };
 
   private hideInfo = () => {
     this.setState({ ...this.state, showInfo: false });
+  };
+
+  private handleTabChanged = (event: any, value: number) => {
+    this.setState({ ...this.state, infoTabValue: value });
   };
 
   private renderInputTodo() {
@@ -159,10 +176,10 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
         <PageContainer>
           <InputContainer>
             <InfoContainer>
-              <HelpOutline onClick={this.showInfo} />
-              {/* <Button variant="fab" color="inherit" aria-label="info" onClick={this.showInfo}>
-              <PriorityHigh />
-            </Button> */}
+              {/* <HelpOutline onClick={this.showInfo} /> */}
+              <IconButton color="inherit" onClick={this.showInfo} aria-label="Close">
+                <HelpOutline />
+              </IconButton>
             </InfoContainer>
             <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
             <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
@@ -176,13 +193,32 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
             </Fade>
           </InputContainer>
         </PageContainer>
-        <Modal open={this.state.showInfo} onClose={this.hideInfo}>
-          <div style={{ display: "flex", flexDirection:"column", backgroundColor: "white"}}>
-            <div>
-              What is this thing?
-            </div>
+        <Dialog open={this.state.showInfo} onClose={this.hideInfo} fullScreen TransitionComponent={slideUpTransition}>
+          <AppBar style={{ position: "relative" }}>
+            <Toolbar color={AccentColor}>
+              <Typography variant="title" color="inherit" style={{ flex: "1" }}>
+                <Tabs
+                  value={this.state.infoTabValue}
+                  onChange={this.handleTabChanged}
+                  indicatorColor={PrimaryForegroundColor}
+                  textColor={PrimaryForegroundColor}>
+                  <Tab icon={<HelpOutline />} label="How to use" />
+                  <Tab icon={<Info />} label="About" />
+                </Tabs>
+              </Typography>
+              <IconButton color="inherit" onClick={this.hideInfo} aria-label="Close">
+                <Close />
+              </IconButton>
+            </Toolbar>{" "}
+          </AppBar>
+          {this.state.infoTabValue === 0 && <div>Item One</div>}
+          {this.state.infoTabValue === 1 && <div>Item Two</div>}
+          {this.state.infoTabValue === 2 && <div>Item Three</div>}
+
+          <div>
+            <div>What is this thing?</div>
           </div>
-        </Modal>
+        </Dialog>
       </div>
     );
   }

@@ -17,7 +17,7 @@ import Info from "@material-ui/icons/Info";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
-import { AccentColor, PageContainer, PrimaryForegroundColor } from "../styles";
+import { AccentColor, PageContainer } from "../styles";
 
 const ToDoContainer = styled.div`
   display: flex;
@@ -197,11 +197,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
           <AppBar style={{ position: "relative" }}>
             <Toolbar color={AccentColor}>
               <Typography variant="title" color="inherit" style={{ flex: "1" }}>
-                <Tabs
-                  value={this.state.infoTabValue}
-                  onChange={this.handleTabChanged}
-                  indicatorColor={PrimaryForegroundColor}
-                  textColor={PrimaryForegroundColor}>
+                <Tabs value={this.state.infoTabValue} onChange={this.handleTabChanged} indicatorColor="secondary" textColor="white" color="#fafafa">
                   <Tab icon={<HelpOutline />} label="How to use" />
                   <Tab icon={<Info />} label="About" />
                 </Tabs>

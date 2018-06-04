@@ -5,19 +5,16 @@ import Dialog from "@material-ui/core/Dialog";
 import Fade from "@material-ui/core/Fade";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import Slide from "@material-ui/core/Slide";
-import Tab from "@material-ui/core/Tab/Tab";
-import Tabs from "@material-ui/core/Tabs/Tabs";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import Typography from "@material-ui/core/Typography/Typography";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import Close from "@material-ui/icons/Close";
 import Done from "@material-ui/icons/Done";
 import HelpOutline from "@material-ui/icons/HelpOutline";
-import Info from "@material-ui/icons/Info";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
-import { AccentColor, PageContainer } from "../styles";
+import { AccentColor, PageContainer, SecondaryBackgroundColor } from "../styles";
 
 const ToDoContainer = styled.div`
   display: flex;
@@ -83,7 +80,6 @@ interface IComponentState {
   todoItem: string;
   isReadingStorage: boolean;
   showInfo: boolean;
-  infoTabValue: number;
 }
 
 enum ComponentConstants {
@@ -99,7 +95,7 @@ function slideUpTransition(props) {
 export default class FocusPage extends React.Component<IComponentProps, IComponentState> {
   constructor(props: IComponentProps) {
     super(props);
-    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false, infoTabValue: 0 };
+    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false };
   }
 
   public render() {
@@ -164,10 +160,6 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
     this.setState({ ...this.state, showInfo: false });
   };
 
-  private handleTabChanged = (event: any, value: number) => {
-    this.setState({ ...this.state, infoTabValue: value });
-  };
-
   private renderInputTodo() {
     const hasText = !!this.state.text && this.state.text !== "";
 
@@ -194,26 +186,30 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
           </InputContainer>
         </PageContainer>
         <Dialog open={this.state.showInfo} onClose={this.hideInfo} fullScreen TransitionComponent={slideUpTransition}>
-          <AppBar style={{ position: "relative" }}>
-            <Toolbar color={AccentColor}>
+          <AppBar style={{ position: "relative", backgroundColor: SecondaryBackgroundColor }}>
+            <Toolbar>
               <Typography variant="title" color="inherit" style={{ flex: "1" }}>
-                <Tabs value={this.state.infoTabValue} onChange={this.handleTabChanged} indicatorColor="secondary" textColor="white" color="#fafafa">
-                  <Tab icon={<HelpOutline />} label="How to use" />
-                  <Tab icon={<Info />} label="About" />
-                </Tabs>
+                focus on this
               </Typography>
               <IconButton color="inherit" onClick={this.hideInfo} aria-label="Close">
                 <Close />
               </IconButton>
-            </Toolbar>{" "}
+            </Toolbar>
           </AppBar>
-          {this.state.infoTabValue === 0 && <div>Item One</div>}
-          {this.state.infoTabValue === 1 && <div>Item Two</div>}
-          {this.state.infoTabValue === 2 && <div>Item Three</div>}
-
-          <div>
-            <div>What is this thing?</div>
-          </div>
+          <PageContainer>
+            <div>
+              <Typography variant="headline" component="h3" style={{ color: AccentColor }}>
+                How to use
+              </Typography>
+              <Typography component="p">Enter the task you are focusing on.</Typography>
+              <br />
+              <Typography component="p">Leave this app up on your phone screen and get to work on that task.</Typography>
+              <br />
+              <Typography component="p">
+                Whenever you turn on your phone screen the first screen you'll see is this app, reminding you what you are trying to focus on
+              </Typography>
+            </div>
+          </PageContainer>
         </Dialog>
       </div>
     );

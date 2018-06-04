@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-export const PrimaryBackgroundColor: string = "#2c2828";
+export const PrimaryBackgroundColor: string = "#000000";
+export const SecondaryBackgroundColor: string = "#828282";
 export const PrimaryForegroundColor: string = "#fafafa";
 export const AccentColor: string = "#2c4ba9";
 export const SecondaryAccentColor: string = "#6077be";

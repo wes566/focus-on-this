@@ -5,10 +5,11 @@ import { AppContainer } from "react-hot-loader";
 import { HashRouter as Router } from "react-router-dom";
 import { injectGlobal, ThemeProvider } from "styled-components";
 import registerServiceWorker from "./registerServiceWorker";
-import { PrimaryBackgroundColor, PrimaryForegroundColor } from "./styles";
+import { PrimaryBackgroundColor, PrimaryForegroundColor, SecondaryAccentColor, SecondaryBackgroundColor } from "./styles";
 
 const theme = {
   colorBackground: PrimaryBackgroundColor,
+  colorBackgroundSecondary: SecondaryBackgroundColor,
   colorTextDefault: PrimaryForegroundColor
 };
 
@@ -19,6 +20,33 @@ body {
   font-family: roboto,sans-serif;
   margin: 0px;
 }
+
+a:link {
+    text-decoration: none;
+    color: ${SecondaryAccentColor};
+}
+
+a:visited {
+    text-decoration: none;
+    color: ${SecondaryAccentColor};
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+li {
+  margin-bottom: 1em;
+}
+
+li:last-child {
+ margin-bottom: 0em;
+}
+
 `;
 
 const render = component => {

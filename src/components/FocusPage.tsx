@@ -14,7 +14,7 @@ import HelpOutline from "@material-ui/icons/HelpOutline";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
-import { AccentColor, PageContainer, SecondaryBackgroundColor } from "../styles";
+import { AltPageContainer, PageContainer, ScrollableContainer, SecondaryAccentColor, SecondaryBackgroundColor, TextContainer } from "../styles";
 
 const ToDoContainer = styled.div`
   display: flex;
@@ -186,7 +186,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
           </InputContainer>
         </PageContainer>
         <Dialog open={this.state.showInfo} onClose={this.hideInfo} fullScreen TransitionComponent={slideUpTransition}>
-          <AppBar style={{ position: "relative", backgroundColor: SecondaryBackgroundColor }}>
+          <AppBar style={{ position: "relative", backgroundColor: SecondaryBackgroundColor, color: SecondaryAccentColor }}>
             <Toolbar>
               <Typography variant="title" color="inherit" style={{ flex: "1" }}>
                 focus on this
@@ -196,20 +196,36 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
               </IconButton>
             </Toolbar>
           </AppBar>
-          <PageContainer>
-            <div>
-              <Typography variant="headline" component="h3" style={{ color: AccentColor }}>
-                How to use
-              </Typography>
-              <Typography component="p">Enter the task you are focusing on.</Typography>
-              <br />
-              <Typography component="p">Leave this app up on your phone screen and get to work on that task.</Typography>
-              <br />
-              <Typography component="p">
-                Whenever you turn on your phone screen the first screen you'll see is this app, reminding you what you are trying to focus on
-              </Typography>
-            </div>
-          </PageContainer>
+          <AltPageContainer style={{ position: "static" }}>
+            <ScrollableContainer>
+              <TextContainer>
+                <h2>about</h2>
+                <p>
+                  Hi, I'm Wes. I made this simple app because sometimes I lack focus while working. I'll be at my computer, ready to write some code
+                  that will <s>eventually get rewritten</s> hopefully do something useful... and then I will mindlessly pick up my phone and look for
+                  a distraction (what's wrong with me?{" "}
+                  <a href="https://youtu.be/9VGuYN8NOSI" target="_blank">
+                    Come on!
+                  </a>). So I wanted a simple way to have something be up on my phone screen when I unlock it that will remind me of what I'm trying
+                  to focus on. And so, I wrote this simple app.
+                </p>
+                <br />
+                <h2>tips for use</h2>
+                <ul>
+                  <li>Add this site to your home screen, it will act like a native app (home screen icon, works offline, fast).</li>
+                  <li>
+                    Make this your browser start page, so every time you open a new browser window you can have a reminder of what you are focusing
+                    on.
+                  </li>
+                  <li>
+                    If you are in a meeting, pull this site up and put in the purpose of your meeting... if any discussion in the meeting does not
+                    pertain to what is on the screen then point to the screen and <s>yell</s> gently remind folks to stay on topic... if your meeting
+                    doesn't have a simple purpose that you can capture in a short sentence then cancel your meeting :)
+                  </li>
+                </ul>
+              </TextContainer>
+            </ScrollableContainer>
+          </AltPageContainer>
         </Dialog>
       </div>
     );

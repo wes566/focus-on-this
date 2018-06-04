@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PrimaryBackgroundColor: string = "#000000";
-export const SecondaryBackgroundColor: string = "#828282";
+export const SecondaryBackgroundColor: string = "#333333";
 export const PrimaryForegroundColor: string = "#fafafa";
 export const AccentColor: string = "#2c4ba9";
 export const SecondaryAccentColor: string = "#6077be";
@@ -31,4 +31,28 @@ export const PageContainer = styled.div`
   align-items: stretch;
   justify-content: space-between;
   flex: 1;
+`;
+
+export const AltPageContainer = styled.div`
+  color: ${props => props.theme.colorTextDefault};
+  background-color: ${props => props.theme.colorBackgroundSecondary};
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  /* position: fixed; */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  flex: 1;
+`;
+
+export const ScrollableContainer = styled.div`
+  overflow: auto;
+  /* position: static; */
+`;
+
+export const TextContainer = styled.div`
+  max-width: 40em;
+  padding: 2em;
 `;

@@ -80,6 +80,7 @@ interface IComponentState {
   todoItem: string;
   isReadingStorage: boolean;
   showInfo: boolean;
+  installPromptEvent: Event | null;
 }
 
 enum ComponentConstants {
@@ -95,7 +96,17 @@ function slideUpTransition(props) {
 export default class FocusPage extends React.Component<IComponentProps, IComponentState> {
   constructor(props: IComponentProps) {
     super(props);
-    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false };
+    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false, installPromptEvent: null };
+
+    // add to home screen stuff (from https://developers.google.com/web/updates/2018/06/a2hs-updates)
+    // window.addEventListener("beforeinstallprompt", event => {
+    //   // tslint:disable-next-line:no-debugger
+    //   debugger;
+    //   // Prevent Chrome <= 67 from automatically showing the prompt
+    //   event.preventDefault();
+    //   // Stash the event so it can be triggered later.
+    //   this.setState({...this.state, installPromptEvent: event});
+    // });
   }
 
   public render() {
@@ -160,8 +171,30 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
     this.setState({ ...this.state, showInfo: false });
   };
 
+  private handleInstallApp = e => {
+    e.preventDefault();
+
+    // // Show the modal add to home screen dialog
+    // installPromptEvent.prompt();
+    // // Wait for the user to respond to the prompt
+    // installPromptEvent.userChoice.then(choice => {
+    //   if (choice.outcome === "accepted") {
+    //     // tslint:disable-next-line:no-console
+    //     console.log("User accepted the A2HS prompt");
+    //   } else {
+    //     // tslint:disable-next-line:no-console
+    //     console.log("User dismissed the A2HS prompt");
+    //   }
+    //   // Clear the saved prompt since it can't be used again
+    //   installPromptEvent = null;
+    // });
+  };
+
   private renderInputTodo() {
     const hasText = !!this.state.text && this.state.text !== "";
+
+    // const isStandalone = "standalone" in window.navigator && (window.navigator as any).standalone;
+    const isStandalone = true;
 
     return (
       <div>
@@ -169,6 +202,13 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
           <InputContainer>
             <InfoContainer>
               {/* <HelpOutline onClick={this.showInfo} /> */}
+              {!isStandalone && (
+                <div style={{ opacity: 0.6, paddingTop: "6px" }}>
+                  <Button color="inherit" onClick={this.handleInstallApp}>
+                    Add to homescreen
+                  </Button>
+                </div>
+              )}
               <IconButton color="inherit" onClick={this.showInfo} aria-label="Close">
                 <HelpOutline />
               </IconButton>

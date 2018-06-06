@@ -14,7 +14,7 @@ import HelpOutline from "@material-ui/icons/HelpOutline";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
-import { AltPageContainer, PageContainer, ScrollableContainer, SecondaryAccentColor, SecondaryBackgroundColor, TextContainer } from "../styles";
+import { AltPageContainer, PageContainer, ScrollableContainer, TextContainer, ThemeColors } from "../styles";
 
 const ToDoContainer = styled.div`
   display: flex;
@@ -226,7 +226,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
           </InputContainer>
         </PageContainer>
         <Dialog open={this.state.showInfo} onClose={this.hideInfo} fullScreen TransitionComponent={slideUpTransition}>
-          <AppBar style={{ position: "relative", backgroundColor: SecondaryBackgroundColor, color: SecondaryAccentColor }}>
+          <AppBar style={{ position: "relative", backgroundColor: ThemeColors.SecondaryBackground, color: ThemeColors.SecondaryAccent }}>
             <Toolbar>
               <Typography variant="title" color="inherit" style={{ flex: "1" }}>
                 focus on this

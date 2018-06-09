@@ -2,6 +2,7 @@
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
+import Drawer from "@material-ui/core/Drawer";
 import Fade from "@material-ui/core/Fade";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import Slide from "@material-ui/core/Slide";
@@ -11,6 +12,7 @@ import ArrowForward from "@material-ui/icons/ArrowForward";
 import Close from "@material-ui/icons/Close";
 import Done from "@material-ui/icons/Done";
 import HelpOutline from "@material-ui/icons/HelpOutline";
+import LeftDrawer from "components/LeftDrawer";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
@@ -80,6 +82,7 @@ interface IComponentState {
   todoItem: string;
   isReadingStorage: boolean;
   showInfo: boolean;
+  openDrawer: boolean;
   installPromptEvent: Event | null;
 }
 
@@ -96,7 +99,7 @@ function slideUpTransition(props) {
 export default class FocusPage extends React.Component<IComponentProps, IComponentState> {
   constructor(props: IComponentProps) {
     super(props);
-    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false, installPromptEvent: null };
+    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false, installPromptEvent: null, openDrawer: false };
 
     // add to home screen stuff (from https://developers.google.com/web/updates/2018/06/a2hs-updates)
     // window.addEventListener("beforeinstallprompt", event => {
@@ -164,11 +167,15 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
   };
 
   private showInfo = () => {
-    this.setState({ ...this.state, showInfo: true });
+    this.setState({ ...this.state, openDrawer: true });
   };
 
   private hideInfo = () => {
     this.setState({ ...this.state, showInfo: false });
+  };
+
+  private hideDrawer = () => {
+    this.setState({ ...this.state, openDrawer: false });
   };
 
   private handleInstallApp = e => {
@@ -225,6 +232,9 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
             </Fade>
           </InputContainer>
         </PageContainer>
+        <Drawer open={this.state.openDrawer} onClose={this.hideDrawer}>
+          <LeftDrawer />
+        </Drawer>
         <Dialog open={this.state.showInfo} onClose={this.hideInfo} fullScreen TransitionComponent={slideUpTransition}>
           <AppBar style={{ position: "relative", backgroundColor: ThemeColors.SecondaryBackground, color: ThemeColors.SecondaryAccent }}>
             <Toolbar>

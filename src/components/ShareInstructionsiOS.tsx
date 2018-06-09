@@ -5,7 +5,7 @@ const iOSShareBase64 =
 
 interface IComponentProps {}
 
-export default class FocusPage extends React.PureComponent<IComponentProps, void> {
+export default class FocusPage extends React.PureComponent<IComponentProps, {}> {
   public render() {
     return (
       <div>

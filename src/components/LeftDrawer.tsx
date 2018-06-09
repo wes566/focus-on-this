@@ -1,3 +1,9 @@
+import List from "@material-ui/core/List/List";
+import ListItem from "@material-ui/core/ListItem/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText/ListItemText";
+import History from "@material-ui/icons/History";
+import Info from "@material-ui/icons/Info";
 import AddToHome from "components/AddToHome";
 import * as React from "react";
 import styled from "styled-components";
@@ -12,12 +18,18 @@ const LeftDrawerContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-  padding: 1em;
 `;
 
-const FooterContainer = styled.div`
-  /* justify-self: flex-end; */
-  /* flex: 1; */
+const TopContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+`;
+
+const Header = styled.div`
+  color: ${ThemeColors.SecondaryAccent};
+  padding-left: 1em;
 `;
 
 interface IComponentProps {}
@@ -28,9 +40,25 @@ export default class LeftDrawer extends React.Component<IComponentProps, ICompon
   public render() {
     return (
       <LeftDrawerContainer>
-        <FooterContainer style={{ backgroundColor: "green" }}>
-          <p>install this app yo</p>
-        </FooterContainer>
+        <TopContainer>
+          <Header>
+            <h2>focus on this</h2>
+          </Header>
+          <List>
+            <ListItem button>
+              <ListItemIcon>
+                <Info style={{ color: ThemeColors.PrimaryForeground }} />
+              </ListItemIcon>
+              <ListItemText primary="About" style={{ color: ThemeColors.PrimaryForeground }} />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <History style={{ color: ThemeColors.PrimaryForeground }} />
+              </ListItemIcon>
+              <ListItemText primary="History" style={{ color: ThemeColors.PrimaryForeground }} />
+            </ListItem>
+          </List>
+        </TopContainer>
         <AddToHome />
       </LeftDrawerContainer>
     );

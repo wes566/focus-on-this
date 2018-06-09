@@ -4,6 +4,10 @@ import * as React from "react";
 import styled from "styled-components";
 import { ThemeColors } from "../styles";
 
+const CardContainer = styled.div`
+  padding: 1em;
+`;
+
 const InstructionCard = styled(CardContent)`
   background-color: ${ThemeColors.PrimaryBackground};
   color: ${ThemeColors.PrimaryForeground};
@@ -15,7 +19,7 @@ const iOSShareBase64 =
 interface IComponentProps {}
 interface IComponentState {}
 
-export class AddToHome extends React.Component<IComponentProps, IComponentState> {
+export default class AddToHome extends React.Component<IComponentProps, IComponentState> {
   public render() {
     const iOS = (process as any).browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
@@ -24,19 +28,21 @@ export class AddToHome extends React.Component<IComponentProps, IComponentState>
     }
 
     return (
-      <Card>
-        <InstructionCard>
-          To install this app just tap
-          <img style={{ verticalAlign: "top" }} src={`data:image/png;base64,${iOSShareBase64}`} /> and then "Add to Home Screen".
-        </InstructionCard>
-      </Card>
+      <CardContainer>
+        <Card>
+          <InstructionCard>
+            To install this app just tap
+            <img style={{ verticalAlign: "top" }} src={`data:image/png;base64,${iOSShareBase64}`} /> and then "Add to Home Screen".
+          </InstructionCard>
+        </Card>
+      </CardContainer>
     );
   }
   private renderiOS() {
     return (
       <Card>
         <p>
-          To install this app just tap
+          oh boy
           <img style={{ verticalAlign: "top" }} src={`data:image/png;base64,${iOSShareBase64}`} /> and then "Add to Home Screen".
         </p>
       </Card>
@@ -44,13 +50,13 @@ export class AddToHome extends React.Component<IComponentProps, IComponentState>
   }
 }
 
-export function RegisterChromeInstallPromptEvent() {
-  let installPromptEvent;
+// export function RegisterChromeInstallPromptEvent() {
+//   let installPromptEvent;
 
-  window.addEventListener("beforeinstallprompt", event => {
-    // Prevent Chrome <= 67 from automatically showing the prompt
-    event.preventDefault();
-    // Stash the event so it can be triggered later.
-    installPromptEvent = event;
-  });
-}
+//   window.addEventListener("beforeinstallprompt", event => {
+//     // Prevent Chrome <= 67 from automatically showing the prompt
+//     event.preventDefault();
+//     // Stash the event so it can be triggered later.
+//     installPromptEvent = event;
+//   });
+// }

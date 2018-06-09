@@ -83,7 +83,6 @@ interface IComponentState {
   isReadingStorage: boolean;
   showInfo: boolean;
   openDrawer: boolean;
-  installPromptEvent: Event | null;
 }
 
 enum ComponentConstants {
@@ -99,7 +98,7 @@ function slideUpTransition(props) {
 export default class FocusPage extends React.Component<IComponentProps, IComponentState> {
   constructor(props: IComponentProps) {
     super(props);
-    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false, installPromptEvent: null, openDrawer: false };
+    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false, openDrawer: false };
 
     // add to home screen stuff (from https://developers.google.com/web/updates/2018/06/a2hs-updates)
     // window.addEventListener("beforeinstallprompt", event => {

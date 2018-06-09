@@ -1,4 +1,4 @@
-import ShareInstructionsiOS from "components/ShareInstructionsiOS";
+import AddToHome from "components/AddToHome";
 import * as React from "react";
 import styled from "styled-components";
 import { ThemeColors } from "../styles";
@@ -12,6 +12,7 @@ const LeftDrawerContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
+  padding: 1em;
 `;
 
 const FooterContainer = styled.div`
@@ -30,7 +31,7 @@ export default class LeftDrawer extends React.Component<IComponentProps, ICompon
         <FooterContainer style={{ backgroundColor: "green" }}>
           <p>install this app yo</p>
         </FooterContainer>
-        <ShareInstructionsiOS />
+        <AddToHome />
       </LeftDrawerContainer>
     );
   }

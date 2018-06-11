@@ -281,17 +281,6 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
                     doesn't have a simple purpose that you can capture in a short sentence then cancel your meeting :)
                   </li>
                 </ul>
-                <br />
-                <p>
-                  <a href="https://github.com/wes566/focus-on-this/issues/new?template=bug_report.md" target="_blank">
-                    Report a bug
-                  </a>
-                </p>
-                <p>
-                  <a href="https://github.com/wes566/focus-on-this/issues/new?template=feature_request.md" target="_blank">
-                    Suggest a feature
-                  </a>
-                </p>
               </TextContainer>
             </ScrollableContainer>
           </AltPageContainer>

@@ -4,12 +4,11 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import Typography from "@material-ui/core/Typography/Typography";
 import Close from "@material-ui/icons/Close";
-// import History from "@material-ui/icons/History";
 import Info from "@material-ui/icons/Info";
+import Launch from "@material-ui/icons/Launch";
 import AddToHome from "components/AddToHome";
 import * as React from "react";
 import styled from "styled-components";
@@ -41,10 +40,9 @@ const BottomContainer = styled.div`
   align-items: stretch;
 `;
 
-// const Header = styled.div`
-//   color: ${ThemeColors.SecondaryAccent};
-//   padding-left: 1em;
-// `;
+const ListItemContent = styled.div`
+  color: ${ThemeColors.PrimaryForeground};
+`;
 
 interface IComponentProps {
   onClose: () => void;
@@ -68,27 +66,31 @@ export default class LeftDrawer extends React.Component<IComponentProps, ICompon
             </Toolbar>
           </AppBar>
           <List>
-            {/* <ListItem button>
-              <ListItemIcon>
-                <History style={{ color: ThemeColors.PrimaryForeground }} />
-              </ListItemIcon>
-              <ListItemText disableTypography primary="History" style={{ color: ThemeColors.PrimaryForeground }} />
-            </ListItem> */}
             <ListItem button>
               <ListItemIcon>
                 <Info style={{ color: ThemeColors.PrimaryForeground }} />
               </ListItemIcon>
-              <ListItemText disableTypography primary="About" style={{ color: ThemeColors.PrimaryForeground }} />
+              <ListItemContent>About</ListItemContent>
             </ListItem>
           </List>
         </TopContainer>
         <BottomContainer>
           <List>
-            <ListItem button>
-              <ListItemText disableTypography primary="Report a Bug" style={{ color: ThemeColors.PrimaryForeground }} />
+            <ListItem button component="a" href="https://github.com/wes566/focus-on-this/issues/new?template=bug_report.md" target="_blank">
+              <ListItemContent>
+                Report a Bug
+                <span>
+                  <Launch style={{ fontSize: "85%", marginLeft: "1em" }} />
+                </span>
+              </ListItemContent>
             </ListItem>
-            <ListItem button>
-              <ListItemText disableTypography primary="Suggest a Feature" style={{ color: ThemeColors.PrimaryForeground }} />
+            <ListItem button component="a" href="https://github.com/wes566/focus-on-this/issues/new?template=feature_request.md" target="_blank">
+              <ListItemContent>
+                Suggest a Feature
+                <span>
+                  <Launch style={{ fontSize: "85%", marginLeft: "1em" }} />
+                </span>
+              </ListItemContent>
             </ListItem>
           </List>
           <Divider />

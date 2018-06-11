@@ -4,6 +4,7 @@ import * as ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
 import { HashRouter as Router } from "react-router-dom";
 import { injectGlobal, ThemeProvider } from "styled-components";
+import "typeface-roboto";
 import registerServiceWorker from "./registerServiceWorker";
 import { ThemeColors } from "./styles";
 

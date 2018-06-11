@@ -47,15 +47,15 @@ export default class LeftDrawer extends React.Component<IComponentProps, ICompon
           <List>
             <ListItem button>
               <ListItemIcon>
-                <Info style={{ color: ThemeColors.PrimaryForeground }} />
+                <History style={{ color: ThemeColors.PrimaryForeground }} />
               </ListItemIcon>
-              <ListItemText primary="About" style={{ color: ThemeColors.PrimaryForeground }} />
+              <ListItemText disableTypography primary="History" style={{ color: ThemeColors.PrimaryForeground }} />
             </ListItem>
             <ListItem button>
               <ListItemIcon>
-                <History style={{ color: ThemeColors.PrimaryForeground }} />
+                <Info style={{ color: ThemeColors.PrimaryForeground }} />
               </ListItemIcon>
-              <ListItemText primary="History" style={{ color: ThemeColors.PrimaryForeground }} />
+              <ListItemText disableTypography primary="About" style={{ color: ThemeColors.PrimaryForeground }} />
             </ListItem>
           </List>
         </TopContainer>

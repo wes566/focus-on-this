@@ -12,6 +12,7 @@ import ArrowForward from "@material-ui/icons/ArrowForward";
 import Close from "@material-ui/icons/Close";
 import Done from "@material-ui/icons/Done";
 import HelpOutline from "@material-ui/icons/HelpOutline";
+import Menu from "@material-ui/icons/Menu";
 import LeftDrawer from "components/LeftDrawer";
 import * as React from "react";
 import styled from "styled-components";
@@ -39,7 +40,7 @@ const InfoContainer = styled.div`
 
 const Footer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 20px;
 `;
 
@@ -230,6 +231,13 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
               <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
             </Fade>
           </InputContainer>
+          <Fade in={true} timeout={SlowFadeTimeout}>
+            <Footer>
+              <Button variant="fab" color="primary" aria-label="menu" onClick={this.showInfo}>
+                <Menu />
+              </Button>
+            </Footer>
+          </Fade>
         </PageContainer>
         <Drawer open={this.state.openDrawer} onClose={this.hideDrawer}>
           <LeftDrawer />
@@ -240,8 +248,8 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
               <Typography variant="title" color="inherit" style={{ flex: "1" }}>
                 focus on this
               </Typography>
-              <IconButton color="inherit" onClick={this.hideInfo} aria-label="Close">
-                <Close />
+              <IconButton color="inherit" onClick={this.hideInfo} aria-label="Menu">
+                <Close style={{ opacity: 20 }} />
               </IconButton>
             </Toolbar>
           </AppBar>
@@ -300,13 +308,16 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
             <Text>{this.state.todoItem}</Text>
           </Fade>
         </ToDoContainer>
-        <Fade in={true} timeout={SlowFadeTimeout}>
-          <Footer>
+        <Footer>
+          <Button style={{ opacity: 0.5 }} variant="fab" color="primary" aria-label="menu" onClick={this.showInfo}>
+            <Menu />
+          </Button>
+          <Fade in={true} timeout={SlowFadeTimeout}>
             <Button variant="fab" color="primary" aria-label="done" onClick={this.markTodoDone}>
               <Done />
             </Button>
-          </Footer>
-        </Fade>
+          </Fade>
+        </Footer>
       </PageContainer>
     );
   }

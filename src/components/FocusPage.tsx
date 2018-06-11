@@ -58,8 +58,7 @@ const Input = styled.input`
 
 const Text = styled.div`
   font-size: 24px;
-  margin-top: 30px;
-  padding-bottom: 20px;
+  padding: 1em;
   cursor: default;
 `;
 
@@ -167,11 +166,15 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
   };
 
   private showInfo = () => {
-    this.setState({ ...this.state, openDrawer: true });
+    this.setState({ ...this.state, showInfo: true });
   };
 
   private hideInfo = () => {
     this.setState({ ...this.state, showInfo: false });
+  };
+
+  private showDrawer = () => {
+    this.setState({ ...this.state, openDrawer: true });
   };
 
   private hideDrawer = () => {
@@ -216,7 +219,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
                   </Button>
                 </div>
               )}
-              <IconButton color="inherit" onClick={this.showInfo} aria-label="Close">
+              <IconButton color="inherit" onClick={this.showInfo} aria-label="About">
                 <HelpOutline />
               </IconButton>
             </InfoContainer>
@@ -231,16 +234,14 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
               <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
             </Fade>
           </InputContainer>
-          <Fade in={true} timeout={SlowFadeTimeout}>
-            <Footer>
-              <Button variant="fab" color="primary" aria-label="menu" onClick={this.showInfo}>
-                <Menu />
-              </Button>
-            </Footer>
-          </Fade>
+          <Footer>
+            <Button variant="fab" color="primary" aria-label="menu" onClick={this.showDrawer}>
+              <Menu />
+            </Button>
+          </Footer>
         </PageContainer>
         <Drawer open={this.state.openDrawer} onClose={this.hideDrawer}>
-          <LeftDrawer />
+          <LeftDrawer onClose={this.hideDrawer} />
         </Drawer>
         <Dialog open={this.state.showInfo} onClose={this.hideInfo} fullScreen TransitionComponent={slideUpTransition}>
           <AppBar style={{ position: "relative", backgroundColor: ThemeColors.SecondaryBackground, color: ThemeColors.SecondaryAccent }}>
@@ -309,7 +310,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
           </Fade>
         </ToDoContainer>
         <Footer>
-          <Button style={{ opacity: 0.5 }} variant="fab" color="primary" aria-label="menu" onClick={this.showInfo}>
+          <Button style={{ opacity: 0.5 }} variant="fab" color="primary" aria-label="menu" onClick={this.showDrawer}>
             <Menu />
           </Button>
           <Fade in={true} timeout={SlowFadeTimeout}>

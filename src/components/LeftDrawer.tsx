@@ -1,4 +1,5 @@
 import AppBar from "@material-ui/core/AppBar/AppBar";
+import Divider from "@material-ui/core/Divider/Divider";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
@@ -7,7 +8,7 @@ import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import Typography from "@material-ui/core/Typography/Typography";
 import Close from "@material-ui/icons/Close";
-import History from "@material-ui/icons/History";
+// import History from "@material-ui/icons/History";
 import Info from "@material-ui/icons/Info";
 import AddToHome from "components/AddToHome";
 import * as React from "react";
@@ -30,6 +31,13 @@ const TopContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: stretch;
+`;
+
+const BottomContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   align-items: stretch;
 `;
 
@@ -60,12 +68,12 @@ export default class LeftDrawer extends React.Component<IComponentProps, ICompon
             </Toolbar>
           </AppBar>
           <List>
-            <ListItem button>
+            {/* <ListItem button>
               <ListItemIcon>
                 <History style={{ color: ThemeColors.PrimaryForeground }} />
               </ListItemIcon>
               <ListItemText disableTypography primary="History" style={{ color: ThemeColors.PrimaryForeground }} />
-            </ListItem>
+            </ListItem> */}
             <ListItem button>
               <ListItemIcon>
                 <Info style={{ color: ThemeColors.PrimaryForeground }} />
@@ -74,7 +82,18 @@ export default class LeftDrawer extends React.Component<IComponentProps, ICompon
             </ListItem>
           </List>
         </TopContainer>
-        <AddToHome />
+        <BottomContainer>
+          <List>
+            <ListItem button>
+              <ListItemText disableTypography primary="Report a Bug" style={{ color: ThemeColors.PrimaryForeground }} />
+            </ListItem>
+            <ListItem button>
+              <ListItemText disableTypography primary="Suggest a Feature" style={{ color: ThemeColors.PrimaryForeground }} />
+            </ListItem>
+          </List>
+          <Divider />
+          <AddToHome />
+        </BottomContainer>
       </LeftDrawerContainer>
     );
   }

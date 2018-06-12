@@ -1,15 +1,8 @@
-// icon list at https://material.io/tools/icons
-import AppBar from "@material-ui/core/AppBar/AppBar";
 import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
 import Drawer from "@material-ui/core/Drawer";
 import Fade from "@material-ui/core/Fade";
 import IconButton from "@material-ui/core/IconButton/IconButton";
-import Slide from "@material-ui/core/Slide";
-import Toolbar from "@material-ui/core/Toolbar/Toolbar";
-import Typography from "@material-ui/core/Typography/Typography";
 import ArrowForward from "@material-ui/icons/ArrowForward";
-import Close from "@material-ui/icons/Close";
 import Done from "@material-ui/icons/Done";
 import HelpOutline from "@material-ui/icons/HelpOutline";
 import Menu from "@material-ui/icons/Menu";
@@ -17,7 +10,7 @@ import LeftDrawer from "components/LeftDrawer";
 import * as React from "react";
 import styled from "styled-components";
 import { getItem, removeItem, saveItem } from "../storage";
-import { AltPageContainer, PageContainer, ScrollableContainer, TextContainer, ThemeColors } from "../styles";
+import { PageContainer } from "../styles";
 
 const ToDoContainer = styled.div`
   display: flex;
@@ -90,10 +83,6 @@ enum ComponentConstants {
 }
 
 const SlowFadeTimeout: number = 3000;
-
-function slideUpTransition(props) {
-  return <Slide direction="up" {...props} />;
-}
 
 export default class FocusPage extends React.Component<IComponentProps, IComponentState> {
   constructor(props: IComponentProps) {
@@ -169,10 +158,6 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
     this.setState({ ...this.state, showInfo: true });
   };
 
-  private hideInfo = () => {
-    this.setState({ ...this.state, showInfo: false });
-  };
-
   private showDrawer = () => {
     this.setState({ ...this.state, openDrawer: true });
   };
@@ -243,48 +228,6 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
         <Drawer open={this.state.openDrawer} onClose={this.hideDrawer}>
           <LeftDrawer onClose={this.hideDrawer} />
         </Drawer>
-        <Dialog open={this.state.showInfo} onClose={this.hideInfo} fullScreen TransitionComponent={slideUpTransition}>
-          <AppBar style={{ position: "relative", backgroundColor: ThemeColors.SecondaryBackground, color: ThemeColors.SecondaryAccent }}>
-            <Toolbar>
-              <Typography variant="title" color="inherit" style={{ flex: "1" }}>
-                focus on this
-              </Typography>
-              <IconButton color="inherit" onClick={this.hideInfo} aria-label="Menu">
-                <Close style={{ opacity: 20 }} />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <AltPageContainer style={{ position: "static" }}>
-            <ScrollableContainer>
-              <TextContainer>
-                <h2>about</h2>
-                <p>
-                  Hi, I'm Wes. I made this simple app because sometimes I lack focus while working. I'll be at my computer, ready to write some code
-                  that will <s>eventually get rewritten</s> hopefully do something useful... and then I will mindlessly pick up my phone and look for
-                  a distraction (what's wrong with me?{" "}
-                  <a href="https://youtu.be/9VGuYN8NOSI" target="_blank">
-                    Come on!
-                  </a>). So I wanted a simple way to have something be up on my phone screen when I unlock it that will remind me of what I'm trying
-                  to focus on. And so, I wrote this simple app.
-                </p>
-                <br />
-                <h2>tips for use</h2>
-                <ul>
-                  <li>Add this site to your home screen, it will act like a native app (home screen icon, works offline, fast).</li>
-                  <li>
-                    Make this your browser start page, so every time you open a new browser window you can have a reminder of what you are focusing
-                    on.
-                  </li>
-                  <li>
-                    If you are in a meeting, pull this site up and put in the purpose of your meeting... if any discussion in the meeting does not
-                    pertain to what is on the screen then point to the screen and <s>yell</s> gently remind folks to stay on topic... if your meeting
-                    doesn't have a simple purpose that you can capture in a short sentence then cancel your meeting :)
-                  </li>
-                </ul>
-              </TextContainer>
-            </ScrollableContainer>
-          </AltPageContainer>
-        </Dialog>
       </div>
     );
   }

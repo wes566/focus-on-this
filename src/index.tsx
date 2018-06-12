@@ -1,8 +1,9 @@
+import AboutPage from "components/AboutPage";
 import FocusPage from "components/FocusPage";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
-import { HashRouter as Router } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import { injectGlobal, ThemeProvider } from "styled-components";
 import "typeface-roboto";
 import registerServiceWorker from "./registerServiceWorker";
@@ -53,11 +54,14 @@ li:last-child {
 const render = component => {
   ReactDOM.render(
     <AppContainer>
-      <Router>
+      <HashRouter>
         <ThemeProvider theme={theme}>
-          <FocusPage />
+          <div>
+            <Route exact path="/" component={FocusPage} />
+            <Route path="/about" component={AboutPage} />
+          </div>
         </ThemeProvider>
-      </Router>
+      </HashRouter>
     </AppContainer>,
     document.getElementById("root")
   );

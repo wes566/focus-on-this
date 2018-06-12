@@ -11,6 +11,7 @@ import Info from "@material-ui/icons/Info";
 import Launch from "@material-ui/icons/Launch";
 import AddToHome from "components/AddToHome";
 import * as React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ThemeColors } from "../styles";
 
@@ -57,16 +58,18 @@ export default class LeftDrawer extends React.Component<IComponentProps, ICompon
         <TopContainer>
           <AppBar style={{ position: "relative", backgroundColor: ThemeColors.SecondaryBackground, color: ThemeColors.SecondaryAccent }}>
             <Toolbar>
-              <Typography variant="title" color="inherit" style={{ flex: "1" }}>
-                focus on this
-              </Typography>
+              <Link to="/">
+                <Typography variant="title" color="inherit" style={{ flex: "1" }}>
+                  focus on this
+                </Typography>
+              </Link>
               <IconButton color="inherit" onClick={this.props.onClose} aria-label="Menu">
                 <Close style={{ opacity: 20 }} />
               </IconButton>
             </Toolbar>
           </AppBar>
           <List>
-            <ListItem button>
+            <ListItem button component="a" href="/#/about?ref=nav">
               <ListItemIcon>
                 <Info style={{ color: ThemeColors.PrimaryForeground }} />
               </ListItemIcon>

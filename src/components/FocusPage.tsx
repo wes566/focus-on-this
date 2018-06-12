@@ -1,10 +1,8 @@
 import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
 import Fade from "@material-ui/core/Fade";
-import IconButton from "@material-ui/core/IconButton/IconButton";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import Done from "@material-ui/icons/Done";
-import HelpOutline from "@material-ui/icons/HelpOutline";
 import Menu from "@material-ui/icons/Menu";
 import LeftDrawer from "components/LeftDrawer";
 import * as React from "react";
@@ -74,7 +72,6 @@ interface IComponentState {
   text: string;
   todoItem: string;
   isReadingStorage: boolean;
-  showInfo: boolean;
   openDrawer: boolean;
 }
 
@@ -87,7 +84,7 @@ const SlowFadeTimeout: number = 3000;
 export default class FocusPage extends React.Component<IComponentProps, IComponentState> {
   constructor(props: IComponentProps) {
     super(props);
-    this.state = { text: "", todoItem: "", isReadingStorage: true, showInfo: false, openDrawer: false };
+    this.state = { text: "", todoItem: "", isReadingStorage: true, openDrawer: false };
 
     // add to home screen stuff (from https://developers.google.com/web/updates/2018/06/a2hs-updates)
     // window.addEventListener("beforeinstallprompt", event => {
@@ -154,10 +151,6 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
     await this.clearTodoFromStorage();
   };
 
-  private showInfo = () => {
-    this.setState({ ...this.state, showInfo: true });
-  };
-
   private showDrawer = () => {
     this.setState({ ...this.state, openDrawer: true });
   };
@@ -204,9 +197,6 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
                   </Button>
                 </div>
               )}
-              <IconButton color="inherit" onClick={this.showInfo} aria-label="About">
-                <HelpOutline />
-              </IconButton>
             </InfoContainer>
             <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
             <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />

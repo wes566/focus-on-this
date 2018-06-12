@@ -11,7 +11,7 @@ import Info from "@material-ui/icons/Info";
 import Launch from "@material-ui/icons/Launch";
 import AddToHome from "components/AddToHome";
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { ThemeColors } from "../styles";
 
@@ -49,20 +49,20 @@ interface IComponentProps {
   onClose: () => void;
 }
 
+type CombinedProps = IComponentProps & RouteComponentProps<{}>;
+
 interface IComponentState {}
 
-export default class LeftDrawer extends React.Component<IComponentProps, IComponentState> {
+export class LeftDrawer extends React.Component<CombinedProps, IComponentState> {
   public render() {
     return (
       <LeftDrawerContainer>
         <TopContainer>
           <AppBar style={{ position: "relative", backgroundColor: ThemeColors.SecondaryBackground, color: ThemeColors.SecondaryAccent }}>
             <Toolbar>
-              <Link to="/">
-                <Typography variant="title" color="inherit" style={{ flex: "1" }}>
-                  focus on this
-                </Typography>
-              </Link>
+              <Typography variant="title" color="inherit" style={{ flex: "1", cursor: "pointer" }} onClick={this.OnLogoClicked}>
+                focus on this
+              </Typography>
               <IconButton color="inherit" onClick={this.props.onClose} aria-label="Menu">
                 <Close style={{ opacity: 20 }} />
               </IconButton>
@@ -102,4 +102,14 @@ export default class LeftDrawer extends React.Component<IComponentProps, ICompon
       </LeftDrawerContainer>
     );
   }
+
+  private OnLogoClicked = e => {
+    e.preventDefault();
+
+    if (this.props.location.pathname !== "/") {
+      this.props.history.push("/");
+    }
+  };
 }
+
+export default withRouter(LeftDrawer);

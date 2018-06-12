@@ -12,9 +12,9 @@ export class AboutPage extends React.PureComponent<RouteComponentProps<{}>, {}> 
       <PageContainer>
         <AppBar style={{ position: "relative", backgroundColor: ThemeColors.SecondaryBackground, color: ThemeColors.SecondaryAccent }}>
           <Toolbar>
-            <Typography variant="title" color="inherit" style={{ flex: "1" }} onClick={this.OnBackClick}>
+            <Typography variant="title" color="inherit" style={{ flex: "1", cursor: "pointer" }} onClick={this.OnBackClick}>
               <span>
-                <ArrowBack style={{ fontSize: "85%", marginLeft: "1em" }} />
+                <ArrowBack style={{ fontSize: "80%", marginRight: "1em" }} />
               </span>
               focus on this
             </Typography>
@@ -56,9 +56,15 @@ export class AboutPage extends React.PureComponent<RouteComponentProps<{}>, {}> 
   private OnBackClick = e => {
     e.preventDefault();
 
-    // tslint:disable-next-line:no-debugger
-    debugger;
-    this.props.history.goBack();
+    const params = new URLSearchParams(this.props.location.search);
+    const referrer = params.get("ref");
+    if (!referrer) {
+      this.props.history.push("/");
+    } else {
+      // if we got to the about page via our own site then the ref query param will be set
+      // and we can just go back in the history so the about page isn't on the back stack
+      this.props.history.goBack();
+    }
   };
 }
 

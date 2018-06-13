@@ -23,12 +23,6 @@ const InputContainer = styled.div`
   padding: 20px;
 `;
 
-const InfoContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-self: stretch;
-`;
-
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -159,45 +153,32 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
     this.setState({ ...this.state, openDrawer: false });
   };
 
-  private handleInstallApp = e => {
-    e.preventDefault();
+  // private handleInstallApp = e => {
+  //   e.preventDefault();
 
-    // // Show the modal add to home screen dialog
-    // installPromptEvent.prompt();
-    // // Wait for the user to respond to the prompt
-    // installPromptEvent.userChoice.then(choice => {
-    //   if (choice.outcome === "accepted") {
-    //     // tslint:disable-next-line:no-console
-    //     console.log("User accepted the A2HS prompt");
-    //   } else {
-    //     // tslint:disable-next-line:no-console
-    //     console.log("User dismissed the A2HS prompt");
-    //   }
-    //   // Clear the saved prompt since it can't be used again
-    //   installPromptEvent = null;
-    // });
-  };
+  // // Show the modal add to home screen dialog
+  // installPromptEvent.prompt();
+  // // Wait for the user to respond to the prompt
+  // installPromptEvent.userChoice.then(choice => {
+  //   if (choice.outcome === "accepted") {
+  //     // tslint:disable-next-line:no-console
+  //     console.log("User accepted the A2HS prompt");
+  //   } else {
+  //     // tslint:disable-next-line:no-console
+  //     console.log("User dismissed the A2HS prompt");
+  //   }
+  //   // Clear the saved prompt since it can't be used again
+  //   installPromptEvent = null;
+  // });
+  // };
 
   private renderInputTodo() {
     const hasText = !!this.state.text && this.state.text !== "";
 
-    // const isStandalone = "standalone" in window.navigator && (window.navigator as any).standalone;
-    const isStandalone = true;
-
     return (
       <div>
         <PageContainer>
-          <InputContainer>
-            <InfoContainer>
-              {/* <HelpOutline onClick={this.showInfo} /> */}
-              {!isStandalone && (
-                <div style={{ opacity: 0.6, paddingTop: "6px" }}>
-                  <Button color="inherit" onClick={this.handleInstallApp}>
-                    Add to homescreen
-                  </Button>
-                </div>
-              )}
-            </InfoContainer>
+          <InputContainer style={{ paddingTop: "5em" }}>
             <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
             <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
             <Fade in={hasText}>

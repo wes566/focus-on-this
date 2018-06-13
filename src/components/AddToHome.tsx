@@ -21,12 +21,21 @@ interface IComponentState {}
 
 export default class AddToHome extends React.Component<IComponentProps, IComponentState> {
   public render() {
-    const iOS = (process as any).browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isStandalone = "standalone" in window.navigator && (window.navigator as any).standalone;
 
-    if (iOS) {
+    // check if mobile safari
+    const ua = window.navigator.userAgent;
+    const iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+    const webkit = !!ua.match(/WebKit/i);
+    const iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
+
+    if (iOSSafari && !isStandalone) {
       return this.renderiOS();
     }
 
+    return <div />;
+  }
+  private renderiOS() {
     return (
       <CardContainer>
         <Card>
@@ -36,16 +45,6 @@ export default class AddToHome extends React.Component<IComponentProps, ICompone
           </InstructionCard>
         </Card>
       </CardContainer>
-    );
-  }
-  private renderiOS() {
-    return (
-      <Card>
-        <p>
-          oh boy
-          <img style={{ verticalAlign: "top" }} src={`data:image/png;base64,${iOSShareBase64}`} /> and then "Add to Home Screen".
-        </p>
-      </Card>
     );
   }
 }

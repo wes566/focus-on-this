@@ -1,27 +1,29 @@
 import styled from "styled-components";
 
-export const PrimaryBackgroundColor: string = "#000000";
-export const SecondaryBackgroundColor: string = "#333333";
-export const PrimaryForegroundColor: string = "#fafafa";
-export const AccentColor: string = "#2c4ba9";
-export const SecondaryAccentColor: string = "#6077be";
+export enum ThemeColors {
+  PrimaryBackground = "#000000",
+  SecondaryBackground = "#333333",
+  PrimaryForeground = "#fafafa",
+  Accent = "#2c4ba9",
+  SecondaryAccent = "#6077be"
+}
 
 export const DarkDiv = styled.div`
-  background-color: PrimaryBackgroundColor;
-  color: PrimaryForegroundColor;
+  background-color: ${ThemeColors.PrimaryBackground};
+  color: ${ThemeColors.PrimaryForeground};
 `;
 
 export const AccentText = styled.div`
-  color: AccentColor;
+  color: ${ThemeColors.Accent};
 `;
 
 export const SecondaryAccentText = styled.div`
-  color: SecondaryAccentColor;
+  color: ${ThemeColors.SecondaryAccent};
 `;
 
 export const PageContainer = styled.div`
-  color: ${props => props.theme.colorTextDefault};
-  background-color: ${props => props.theme.colorBackground};
+  color: ${ThemeColors.PrimaryForeground};
+  background-color: ${ThemeColors.PrimaryBackground};
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -34,8 +36,8 @@ export const PageContainer = styled.div`
 `;
 
 export const AltPageContainer = styled.div`
-  color: ${props => props.theme.colorTextDefault};
-  background-color: ${props => props.theme.colorBackgroundSecondary};
+  color: ${ThemeColors.PrimaryForeground};
+  background-color: ${ThemeColors.SecondaryBackground};
   height: 100%;
   width: 100%;
   overflow: hidden;

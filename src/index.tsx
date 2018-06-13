@@ -1,16 +1,18 @@
+import AboutPage from "components/AboutPage";
 import FocusPage from "components/FocusPage";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
-import { HashRouter as Router } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import { injectGlobal, ThemeProvider } from "styled-components";
+import "typeface-roboto";
 import registerServiceWorker from "./registerServiceWorker";
-import { PrimaryBackgroundColor, PrimaryForegroundColor, SecondaryAccentColor, SecondaryBackgroundColor } from "./styles";
+import { ThemeColors } from "./styles";
 
 const theme = {
-  colorBackground: PrimaryBackgroundColor,
-  colorBackgroundSecondary: SecondaryBackgroundColor,
-  colorTextDefault: PrimaryForegroundColor
+  colorBackground: ThemeColors.PrimaryBackground,
+  colorBackgroundSecondary: ThemeColors.SecondaryBackground,
+  colorTextDefault: ThemeColors.PrimaryForeground
 };
 
 // tslint:disable-next-line:no-unused-expression
@@ -23,12 +25,12 @@ body {
 
 a:link {
     text-decoration: none;
-    color: ${SecondaryAccentColor};
+    color: ${ThemeColors.SecondaryAccent};
 }
 
 a:visited {
     text-decoration: none;
-    color: ${SecondaryAccentColor};
+    color: ${ThemeColors.SecondaryAccent};
 }
 
 a:hover {
@@ -52,11 +54,14 @@ li:last-child {
 const render = component => {
   ReactDOM.render(
     <AppContainer>
-      <Router>
+      <HashRouter>
         <ThemeProvider theme={theme}>
-          <FocusPage />
+          <div>
+            <Route exact path="/" component={FocusPage} />
+            <Route path="/about" component={AboutPage} />
+          </div>
         </ThemeProvider>
-      </Router>
+      </HashRouter>
     </AppContainer>,
     document.getElementById("root")
   );

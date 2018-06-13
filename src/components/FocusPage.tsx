@@ -224,24 +224,29 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
 
   private renderTodo() {
     return (
-      <PageContainer>
-        <div />
-        <ToDoContainer>
-          <Fade in={true}>
-            <Text>{this.state.todoItem}</Text>
-          </Fade>
-        </ToDoContainer>
-        <Footer>
-          <Button style={{ opacity: 0.5 }} variant="fab" color="primary" aria-label="menu" onClick={this.showDrawer}>
-            <Menu />
-          </Button>
-          <Fade in={true} timeout={SlowFadeTimeout}>
-            <Button variant="fab" color="primary" aria-label="done" onClick={this.markTodoDone}>
-              <Done />
+      <div>
+        <PageContainer>
+          <div />
+          <ToDoContainer>
+            <Fade in={true}>
+              <Text>{this.state.todoItem}</Text>
+            </Fade>
+          </ToDoContainer>
+          <Footer>
+            <Button style={{ opacity: 0.5 }} variant="fab" color="primary" aria-label="menu" onClick={this.showDrawer}>
+              <Menu />
             </Button>
-          </Fade>
-        </Footer>
-      </PageContainer>
+            <Fade in={true} timeout={SlowFadeTimeout}>
+              <Button variant="fab" color="primary" aria-label="done" onClick={this.markTodoDone}>
+                <Done />
+              </Button>
+            </Fade>
+          </Footer>
+        </PageContainer>
+        <Drawer open={this.state.openDrawer} onClose={this.hideDrawer}>
+          <LeftDrawer onClose={this.hideDrawer} />
+        </Drawer>
+      </div>
     );
   }
 

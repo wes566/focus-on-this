@@ -13,7 +13,7 @@ import AddToHome from "components/AddToHome";
 import * as React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { ThemeColors, ScrollableContainer } from "../styles";
+import { ScrollableContainer, ThemeColors } from "../styles";
 
 const LeftDrawerContainer = styled.div`
   max-width: 250px;

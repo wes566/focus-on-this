@@ -39,6 +39,7 @@ const BottomContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: stretch;
+  padding-bottom: 1em;
 `;
 
 const ListItemContent = styled.div`

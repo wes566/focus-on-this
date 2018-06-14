@@ -19,6 +19,7 @@ const theme = {
 injectGlobal`
 body {
   position: fixed;
+  overscroll-behavior: contain;
   font-family: roboto,sans-serif;
   margin: 0px;
 }

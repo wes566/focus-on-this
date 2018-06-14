@@ -50,7 +50,7 @@ export const AltPageContainer = styled.div`
 `;
 
 export const ScrollableContainer = styled.div`
-  overflow: auto;
+  overflow-y: auto;
   /* position: static; */
 `;
 

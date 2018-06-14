@@ -25,6 +25,7 @@ const LeftDrawerContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
+  overflow-y: auto;
 `;
 
 const TopContainer = styled.div`

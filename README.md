@@ -16,3 +16,10 @@ A stupid simple way to focus on one thing at a time.
 ```
 yarn deploy
 ```
+
+### Things to do to make this feel like native app
+
+- Disable pull to refresh on android
+- set manifest display to `standalone` or `fullscreen` (fullscreen has no real affect on ios it seems)
+- Swipe to go back on ios (todo)
+- add splash screen (todo)

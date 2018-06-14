@@ -13,7 +13,7 @@ import AddToHome from "components/AddToHome";
 import * as React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
-import { ThemeColors } from "../styles";
+import { ThemeColors, ScrollableContainer } from "../styles";
 
 const LeftDrawerContainer = styled.div`
   max-width: 250px;
@@ -25,7 +25,6 @@ const LeftDrawerContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-  overflow-y: auto;
 `;
 
 const TopContainer = styled.div`
@@ -59,48 +58,50 @@ export class LeftDrawer extends React.Component<CombinedProps, IComponentState> 
   public render() {
     return (
       <LeftDrawerContainer>
-        <TopContainer>
-          <AppBar style={{ position: "relative", backgroundColor: ThemeColors.SecondaryBackground, color: ThemeColors.SecondaryAccent }}>
-            <Toolbar>
-              <Typography variant="title" color="inherit" style={{ flex: "1", cursor: "pointer" }} onClick={this.OnLogoClicked}>
-                focus on this
-              </Typography>
-              <IconButton color="inherit" onClick={this.props.onClose} aria-label="Menu">
-                <Close style={{ opacity: 20 }} />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <List>
-            <ListItem button component="a" href="/#/about?ref=nav">
-              <ListItemIcon>
-                <Info style={{ color: ThemeColors.PrimaryForeground }} />
-              </ListItemIcon>
-              <ListItemContent>About</ListItemContent>
-            </ListItem>
-          </List>
-        </TopContainer>
-        <BottomContainer>
-          <List>
-            <ListItem button component="a" href="https://github.com/wes566/focus-on-this/issues/new?template=bug_report.md" target="_blank">
-              <ListItemContent>
-                Report a Bug
-                <span>
-                  <Launch style={{ fontSize: "85%", marginLeft: "1em" }} />
-                </span>
-              </ListItemContent>
-            </ListItem>
-            <ListItem button component="a" href="https://github.com/wes566/focus-on-this/issues/new?template=feature_request.md" target="_blank">
-              <ListItemContent>
-                Suggest a Feature
-                <span>
-                  <Launch style={{ fontSize: "85%", marginLeft: "1em" }} />
-                </span>
-              </ListItemContent>
-            </ListItem>
-          </List>
-          <Divider />
-          <AddToHome />
-        </BottomContainer>
+        <ScrollableContainer>
+          <TopContainer>
+            <AppBar style={{ position: "relative", backgroundColor: ThemeColors.SecondaryBackground, color: ThemeColors.SecondaryAccent }}>
+              <Toolbar>
+                <Typography variant="title" color="inherit" style={{ flex: "1", cursor: "pointer" }} onClick={this.OnLogoClicked}>
+                  focus on this
+                </Typography>
+                <IconButton color="inherit" onClick={this.props.onClose} aria-label="Menu">
+                  <Close style={{ opacity: 20 }} />
+                </IconButton>
+              </Toolbar>
+            </AppBar>
+            <List>
+              <ListItem button component="a" href="/#/about?ref=nav">
+                <ListItemIcon>
+                  <Info style={{ color: ThemeColors.PrimaryForeground }} />
+                </ListItemIcon>
+                <ListItemContent>About</ListItemContent>
+              </ListItem>
+            </List>
+          </TopContainer>
+          <BottomContainer>
+            <List>
+              <ListItem button component="a" href="https://github.com/wes566/focus-on-this/issues/new?template=bug_report.md" target="_blank">
+                <ListItemContent>
+                  Report a Bug
+                  <span>
+                    <Launch style={{ fontSize: "85%", marginLeft: "1em" }} />
+                  </span>
+                </ListItemContent>
+              </ListItem>
+              <ListItem button component="a" href="https://github.com/wes566/focus-on-this/issues/new?template=feature_request.md" target="_blank">
+                <ListItemContent>
+                  Suggest a Feature
+                  <span>
+                    <Launch style={{ fontSize: "85%", marginLeft: "1em" }} />
+                  </span>
+                </ListItemContent>
+              </ListItem>
+            </List>
+            <Divider />
+            <AddToHome />
+          </BottomContainer>
+        </ScrollableContainer>
       </LeftDrawerContainer>
     );
   }

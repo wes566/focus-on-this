@@ -1,5 +1,6 @@
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import { isSafariMobile } from "environment";
 import * as React from "react";
 import styled from "styled-components";
 import { ThemeColors } from "../styles";
@@ -21,15 +22,7 @@ interface IComponentState {}
 
 export default class AddToHome extends React.Component<IComponentProps, IComponentState> {
   public render() {
-    const isStandalone = "standalone" in window.navigator && (window.navigator as any).standalone;
-
-    // check if mobile safari
-    const ua = window.navigator.userAgent;
-    const iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
-    const webkit = !!ua.match(/WebKit/i);
-    const iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
-
-    if (iOSSafari && !isStandalone) {
+    if (isSafariMobile) {
       return this.renderiOS();
     }
 
@@ -40,8 +33,8 @@ export default class AddToHome extends React.Component<IComponentProps, ICompone
       <CardContainer>
         <Card>
           <InstructionCard>
-            To install this app just tap
-            <img style={{ verticalAlign: "top" }} src={`data:image/png;base64,${iOSShareBase64}`} /> and then "Add to Home Screen".
+            To install this app tap <img style={{ verticalAlign: "top" }} src={`data:image/png;base64,${iOSShareBase64}`} /> and then "Add to Home
+            Screen".
           </InstructionCard>
         </Card>
       </CardContainer>

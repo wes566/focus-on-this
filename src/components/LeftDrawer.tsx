@@ -1,5 +1,4 @@
 import AppBar from "@material-ui/core/AppBar/AppBar";
-import Divider from "@material-ui/core/Divider/Divider";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
@@ -15,10 +14,13 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { ThemeColors } from "../styles";
 
+export enum LeftDrawerConstants {
+  LeftDrawerWidth = "280px"
+}
+
 const LeftDrawerContainer = styled.div`
-  max-width: 250px;
+  max-width: ${LeftDrawerConstants.LeftDrawerWidth};
   width: 100%;
-  height: 100%;
   color: ${ThemeColors.PrimaryForeground};
   background-color: ${ThemeColors.SecondaryBackground};
   display: flex;
@@ -40,7 +42,7 @@ const BottomContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: stretch;
-  padding-bottom: 1em;
+  padding-bottom: 10px;
 `;
 
 const ListItemContent = styled.div`
@@ -53,12 +55,29 @@ interface IComponentProps {
 
 type CombinedProps = IComponentProps & RouteComponentProps<{}>;
 
-interface IComponentState {}
+interface IComponentState {
+  height?: string;
+}
 
 export class LeftDrawer extends React.Component<CombinedProps, IComponentState> {
+  constructor(props: CombinedProps) {
+    super(props);
+    this.state = {};
+
+    // add to home screen stuff (from https://developers.google.com/web/updates/2018/06/a2hs-updates)
+    // window.addEventListener("beforeinstallprompt", event => {
+    //   // tslint:disable-next-line:no-debugger
+    //   debugger;
+    //   // Prevent Chrome <= 67 from automatically showing the prompt
+    //   event.preventDefault();
+    //   // Stash the event so it can be triggered later.
+    //   this.setState({...this.state, installPromptEvent: event});
+    // });
+  }
+
   public render() {
     return (
-      <LeftDrawerContainer>
+      <LeftDrawerContainer style={{ height: this.state.height || "100%" }}>
         <TopContainer>
           <AppBar style={{ position: "relative", backgroundColor: ThemeColors.SecondaryBackground, color: ThemeColors.SecondaryAccent }}>
             <Toolbar>
@@ -98,12 +117,20 @@ export class LeftDrawer extends React.Component<CombinedProps, IComponentState> 
               </ListItemContent>
             </ListItem>
           </List>
-          <Divider />
           <AddToHome />
         </BottomContainer>
       </LeftDrawerContainer>
     );
   }
+
+  public componentDidMount() {
+    window.addEventListener("resize", this.updateWindowDimensions);
+    this.updateWindowDimensions();
+  }
+
+  private updateWindowDimensions = () => {
+    this.setState({ ...this.state, height: `${window.innerHeight}px` });
+  };
 
   private OnLogoClicked = e => {
     e.preventDefault();

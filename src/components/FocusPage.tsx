@@ -176,58 +176,57 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
     const hasText = !!this.state.text && this.state.text !== "";
 
     return (
-      <div>
-        <PageContainer>
-          <InputContainer style={{ paddingTop: "5em" }}>
-            <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
-            <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
-            <Fade in={hasText}>
-              <Button variant="fab" color="primary" aria-label="ok" onClick={this.handleToDoEntered}>
-                <ArrowForward />
-              </Button>
-            </Fade>
-            <Fade in={hasText} timeout={hasText ? SlowFadeTimeout : 0}>
-              <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
-            </Fade>
-          </InputContainer>
-          <Footer>
-            <Button variant="fab" color="primary" aria-label="menu" onClick={this.showDrawer}>
-              <Menu />
+      <PageContainer>
+        <InputContainer style={{ paddingTop: "5em" }}>
+          <InstructionText>{`What one thing do you want to focus on right now?`}</InstructionText>
+          <Input onChange={this.onInputChanged} value={this.state.text} autoFocus={true} onKeyUp={this.onKeyUp} />
+          <Fade in={hasText}>
+            <Button variant="fab" color="primary" aria-label="ok" onClick={this.handleToDoEntered}>
+              <ArrowForward />
             </Button>
-          </Footer>
-        </PageContainer>
-        <Drawer open={this.state.openDrawer} onClose={this.hideDrawer}>
+          </Fade>
+          <Fade in={hasText} timeout={hasText ? SlowFadeTimeout : 0}>
+            <HintText style={{ paddingTop: "10px" }}>or press Enter</HintText>
+          </Fade>
+        </InputContainer>
+        <Footer>{this.renderMenu()}</Footer>
+        <Drawer open={this.state.openDrawer} onClose={this.hideDrawer} style={{ backgroundColor: "yellow" }}>
           <LeftDrawer onClose={this.hideDrawer} />
         </Drawer>
-      </div>
+      </PageContainer>
     );
   }
 
   private renderTodo() {
     return (
-      <div>
-        <PageContainer>
-          <div />
-          <ToDoContainer>
-            <Fade in={true}>
-              <Text>{this.state.todoItem}</Text>
-            </Fade>
-          </ToDoContainer>
-          <Footer>
-            <Button style={{ opacity: 0.5 }} variant="fab" color="primary" aria-label="menu" onClick={this.showDrawer}>
-              <Menu />
+      <PageContainer>
+        <div />
+        <ToDoContainer>
+          <Fade in={true}>
+            <Text>{this.state.todoItem}</Text>
+          </Fade>
+        </ToDoContainer>
+        <Footer>
+          {this.renderMenu(0.5)}
+          <Fade in={true} timeout={SlowFadeTimeout}>
+            <Button variant="fab" color="primary" aria-label="done" onClick={this.markTodoDone}>
+              <Done />
             </Button>
-            <Fade in={true} timeout={SlowFadeTimeout}>
-              <Button variant="fab" color="primary" aria-label="done" onClick={this.markTodoDone}>
-                <Done />
-              </Button>
-            </Fade>
-          </Footer>
-        </PageContainer>
+          </Fade>
+        </Footer>
         <Drawer open={this.state.openDrawer} onClose={this.hideDrawer}>
           <LeftDrawer onClose={this.hideDrawer} />
         </Drawer>
-      </div>
+      </PageContainer>
+    );
+  }
+
+  private renderMenu(menuOpacity?: number) {
+    const opacityToUse = menuOpacity || 1.0;
+    return (
+      <Button style={{ opacity: opacityToUse }} variant="fab" color="primary" aria-label="menu" onClick={this.showDrawer}>
+        <Menu />
+      </Button>
     );
   }
 

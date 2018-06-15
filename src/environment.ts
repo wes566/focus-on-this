@@ -9,7 +9,6 @@ export function isStandaloneApp(): boolean {
   return "standalone" in window.navigator && (window.navigator as any).standalone;
 }
 
-
 /**
  * Returns true if running on iOS in Safari browser (and not in Standlone/App mode)
  *

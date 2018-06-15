@@ -190,7 +190,7 @@ export default class FocusPage extends React.Component<IComponentProps, ICompone
           </Fade>
         </InputContainer>
         <Footer>{this.renderMenu()}</Footer>
-        <Drawer open={this.state.openDrawer} onClose={this.hideDrawer} style={{ backgroundColor: "yellow" }}>
+        <Drawer open={this.state.openDrawer} onClose={this.hideDrawer}>
           <LeftDrawer onClose={this.hideDrawer} />
         </Drawer>
       </PageContainer>

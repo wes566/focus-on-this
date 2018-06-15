@@ -26,7 +26,7 @@ export const PageContainer = styled.div`
   background-color: ${ThemeColors.PrimaryBackground};
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -40,18 +40,13 @@ export const AltPageContainer = styled.div`
   background-color: ${ThemeColors.SecondaryBackground};
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   /* position: fixed; */
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
   flex: 1;
-`;
-
-export const ScrollableContainer = styled.div`
-  overflow-y: auto;
-  /* position: static; */
 `;
 
 export const TextContainer = styled.div`

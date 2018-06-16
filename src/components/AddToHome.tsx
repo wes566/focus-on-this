@@ -22,7 +22,7 @@ interface IComponentState {}
 
 export default class AddToHome extends React.Component<IComponentProps, IComponentState> {
   public render() {
-    if (isSafariMobile) {
+    if (isSafariMobile()) {
       return this.renderiOS();
     }
 

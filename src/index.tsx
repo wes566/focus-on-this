@@ -52,7 +52,7 @@ li:last-child {
 
 `;
 
-const render = component => {
+const render = () => {
   ReactDOM.render(
     <AppContainer>
       <HashRouter>
@@ -72,6 +72,6 @@ if (module.hot) {
   module.hot.accept();
 }
 
-render(FocusPage);
+render();
 
 registerServiceWorker();

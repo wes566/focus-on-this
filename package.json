@@ -2,7 +2,6 @@
   "name": "react-ts-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://focusonthis.app",
   "dependencies": {
     "@material-ui/core": "^1.0.0",
     "@material-ui/icons": "^1.0.0",
@@ -22,8 +21,7 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "precommit": "lint-staged",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "yarn build"
   },
   "lint-staged": {
     "*.ts": [
@@ -43,7 +41,6 @@
     "@types/react-router-dom": "4.2.6",
     "@types/webpack": "4.1.4",
     "@types/webpack-env": "1.13.6",
-    "gh-pages": "1.1.0",
     "lint-staged": "7.0.5",
     "prettier": "1.12.1",
     "react-app-rewired": "1.5.2",

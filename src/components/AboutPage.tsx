@@ -25,13 +25,9 @@ export class AboutPage extends React.PureComponent<RouteComponentProps<{}>, {}> 
             <TextContainer>
               <h2>about</h2>
               <p>
-                Hi, I'm Wes. I made this simple app because sometimes I lack focus while working. I'll be at my computer, ready to write some code
-                that will <s>eventually get rewritten</s> hopefully do something useful... and then I will mindlessly pick up my phone and look for a
-                distraction (what's wrong with me?{" "}
-                <a href="https://youtu.be/9VGuYN8NOSI" target="_blank">
-                  Come on!
-                </a>). So I wanted a simple way to have something be up on my phone screen when I unlock it that will remind me of what I'm trying to
-                focus on. And so, I wrote this simple app.
+                Hi, I'm Wes. I made this simple app because sometimes I need to focus on just one thing, and it helps to have that thing written down
+                and sitting on my phone screen. When I unlock my phone it's the first thing I see and that reminds me of what I'm trying to focus on.
+                And so, I wrote this simple app.
               </p>
               <br />
               <h2>tips for use</h2>

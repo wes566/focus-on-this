@@ -1,0 +1,10 @@
+html,
+body {
+  margin: 0;
+
+  --primary-bg-color: #111111;
+  --primary-fg-color: #fafafa;
+  --accent-color: #2c4ba9;
+
+  font-family: roboto, sans-serif;
+}

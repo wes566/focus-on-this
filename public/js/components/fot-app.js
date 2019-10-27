@@ -146,7 +146,11 @@ class FotApp extends LitElement {
   }
 
   static get properties() {
-    return { focusItem: { type: String }, hasText: { type: Boolean } };
+    return {
+      focusItem: { type: String },
+      // TODO: implement hasChanged for inputValue
+      inputValue: { type: String }
+    };
   }
 
   render() {
@@ -181,7 +185,7 @@ class FotApp extends LitElement {
           <p class="centered-label">
             What one thing do you want to focus on right now?
           </p>
-          <input @keyup="${this.handleKeyUp}" autofocus />
+          <input id="focusItemInput" @keyup="${this.handleKeyUp}" autofocus />
           <mwc-fab
             class="${this.hasText ? "fade-in" : "fade-out"}"
             icon="arrow_forward"
@@ -224,6 +228,21 @@ class FotApp extends LitElement {
     `;
   }
 
+  // TODO - refocus the input box after a focus item is complete
+  // /**
+  //  *
+  //  * @param {{[s:string]: any}} changedProperties
+  //  */
+  // updated(changedProperties) {
+  //   if ("focusItem" in changedProperties) {
+  //     const inputElement =
+  //       this.shadowRoot && this.shadowRoot.getElementById("focusItemInput");
+  //     if (!!inputElement) {
+  //       inputElement.focus();
+  //     }
+  //   }
+  // }
+
   /**
    *
    *
@@ -246,6 +265,7 @@ class FotApp extends LitElement {
   handleFocusItemDone(e) {
     localStorage.removeItem(FOCUS_ITEM_KEY);
     this.focusItem = "";
+    this.inputValue = "";
   }
 
   /**
@@ -253,14 +273,14 @@ class FotApp extends LitElement {
    * @param {Event} e
    */
   handleFocusItemSubmit(e) {
-    if (!!this.inputValue) {
-      localStorage.setItem(FOCUS_ITEM_KEY, this.inputValue);
+    if (!this.inputValue) {
+      return;
     }
 
-    this.focusItem = this.inputValue;
+    localStorage.setItem(FOCUS_ITEM_KEY, this.inputValue);
 
-    // TODO - hack, for some reason the MWC FABs show funky ripple if you don't unblur
-    /** @type {HTMLElement} */ (e.target).blur();
+    this.focusItem = this.inputValue;
+    this.inputValue = "";
   }
 
   /**
@@ -272,9 +292,11 @@ class FotApp extends LitElement {
       this.handleFocusItemSubmit(e);
     } else if (e.target !== null) {
       this.inputValue = /** @type {HTMLInputElement} */ (e.target).value;
-
-      this.hasText = !!this.inputValue;
     }
+  }
+
+  get hasText() {
+    return !!this.inputValue;
   }
 }
 

@@ -5,6 +5,8 @@ body {
   --primary-bg-color: #111111;
   --primary-fg-color: #fafafa;
   --accent-color: #2c4ba9;
+  --secondary-bg-color: #333333;
+  --secondary-accent-color: #6077be;
 
   font-family: roboto, sans-serif;
 }

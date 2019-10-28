@@ -7,6 +7,8 @@ import { LitElement, html, css } from "../../web_modules/lit-element.js";
 import "../../web_modules/side-drawer.js";
 import "../../web_modules/@material/mwc-fab.js";
 
+import "./fot-drawer.js";
+
 const FOCUS_ITEM_KEY = "focusitem";
 
 /** @extends {LitElement} */
@@ -230,7 +232,7 @@ class FotApp extends LitElement {
             @click="${this.handleFocusItemDone}"
           ></mwc-fab>
         </div>
-        <side-drawer id="drawer"></side-drawer>
+        <side-drawer id="drawer"><fot-drawer></fot-drawer></side-drawer>
       </div>
     `;
   }

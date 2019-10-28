@@ -18,6 +18,7 @@ class FotDrawer extends LitElement {
         flex-direction: column;
         justify-content: space-between;
         align-items: stretch;
+        box-sizing: border-box;
         padding: 12px 16px;
       }
 
@@ -34,6 +35,13 @@ class FotDrawer extends LitElement {
         justify-content: flex-end;
         align-items: stretch;
       }
+
+      .sxs {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
     `;
   }
 
@@ -45,10 +53,11 @@ class FotDrawer extends LitElement {
   render() {
     return html`
       <div id="top-container">
-        <div>
+        <div class="sxs">
           <h2>Focus On This</h2>
-          <!-- TODO - put an X icon here to close the drawer -->
+          <!-- TODO - svg should be wrapped in a button for a11y -->
           <svg
+            @click="${this.handleCloseClick}"
             class="i-close"
             viewBox="0 0 32 32"
             width="24"
@@ -66,6 +75,14 @@ class FotDrawer extends LitElement {
       </div>
       <div id="bottom-container"></div>
     `;
+  }
+
+  /**
+   * @param {Event} e
+   */
+  handleCloseClick(e) {
+    const event = new Event("on-close");
+    this.dispatchEvent(event);
   }
 }
 

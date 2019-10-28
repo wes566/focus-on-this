@@ -232,7 +232,9 @@ class FotApp extends LitElement {
             @click="${this.handleFocusItemDone}"
           ></mwc-fab>
         </div>
-        <side-drawer id="drawer"><fot-drawer></fot-drawer></side-drawer>
+        <side-drawer id="drawer"
+          ><fot-drawer @on-close="${this.handleDrawerClosed}"></fot-drawer
+        ></side-drawer>
       </div>
     `;
   }
@@ -253,10 +255,7 @@ class FotApp extends LitElement {
   // }
 
   /**
-   *
-   *
    * @param {Event} e
-   * @memberof FotApp
    */
   handleMenuClick(e) {
     const drawer =
@@ -268,7 +267,6 @@ class FotApp extends LitElement {
   }
 
   /**
-   *
    * @param {Event} e
    */
   handleFocusItemDone(e) {
@@ -278,7 +276,6 @@ class FotApp extends LitElement {
   }
 
   /**
-   *
    * @param {Event} e
    */
   handleFocusItemSubmit(e) {
@@ -293,7 +290,6 @@ class FotApp extends LitElement {
   }
 
   /**
-   *
    * @param {KeyboardEvent} e
    */
   handleKeyUp(e) {
@@ -301,6 +297,18 @@ class FotApp extends LitElement {
       this.handleFocusItemSubmit(e);
     } else if (e.target !== null) {
       this.inputValue = /** @type {HTMLInputElement} */ (e.target).value;
+    }
+  }
+
+  /**
+   * @param {Event} e
+   */
+  handleDrawerClosed(e) {
+    const drawer =
+      /** @type {SideDrawer | null} */ (this.shadowRoot &&
+      this.shadowRoot.getElementById("drawer"));
+    if (drawer) {
+      drawer.open = false;
     }
   }
 

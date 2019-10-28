@@ -145,11 +145,18 @@ class FotApp extends LitElement {
     `;
   }
 
+  /** @returns {import("lit-element").PropertyDeclarations} */
   static get properties() {
     return {
       focusItem: { type: String },
-      // TODO: implement hasChanged for inputValue
-      inputValue: { type: String }
+      inputValue: {
+        type: String,
+        hasChanged(newVal, oldVal) {
+          const isOldEmpty = !oldVal;
+          const isNewEmpty = !newVal;
+          return isOldEmpty !== isNewEmpty;
+        }
+      }
     };
   }
 

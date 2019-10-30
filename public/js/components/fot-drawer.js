@@ -19,7 +19,7 @@ class FotDrawer extends LitElement {
         justify-content: space-between;
         align-items: stretch;
         box-sizing: border-box;
-        padding: 12px 16px;
+        padding: 12px 0 12px 0;
       }
 
       #top-container {
@@ -27,6 +27,10 @@ class FotDrawer extends LitElement {
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
+      }
+
+      h2 {
+        padding-left: 16px;
       }
 
       #bottom-container {
@@ -41,6 +45,19 @@ class FotDrawer extends LitElement {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+      }
+
+      .button {
+        display: inline-block;
+        background: var(--accent-color);
+        color: white;
+        text-align: center;
+        padding: 15px 45px;
+        margin-bottom: 50px;
+      }
+
+      /* TODO - some indicator on hover */
+      .button:hover {
       }
     `;
   }
@@ -71,7 +88,7 @@ class FotDrawer extends LitElement {
             <path d="M2 30 L30 2 M30 30 L2 2"></path>
           </svg>
         </div>
-        <h4>A simple app to help you focus on one thing</h4>
+        <a class="button" role="button" href="./about">About</a>
       </div>
       <div id="bottom-container"></div>
     `;

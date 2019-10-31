@@ -70,7 +70,6 @@ class FotDrawer extends LitElement {
         text-decoration: none;
       }
 
-      /* TODO - some indicator on hover */
       .button:hover {
         background: var(--accent-color);
       }
@@ -136,7 +135,58 @@ class FotDrawer extends LitElement {
           </div>
         </a>
       </div>
-      <div id="bottom-container"></div>
+      <div id="bottom-container">
+        <a
+          class="button"
+          role="button"
+          href="https://github.com/wes566/focus-on-this/issues/new?template=bug_report.md"
+          target="_blank"
+          ><div class="list-button">
+            <span>Report a Bug</span>
+            <svg
+              id="i-external"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentcolor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <path
+                d="M14 9 L3 9 3 29 23 29 23 18 M18 4 L28 4 28 14 M28 4 L14 18"
+              />
+            </svg>
+          </div>
+        </a>
+        <a
+          class="button"
+          role="button"
+          href="https://github.com/wes566/focus-on-this/issues/new?template=feature_request.md"
+          target="_blank"
+          ><div class="list-button">
+            <span>Suggest a Feature</span>
+            <svg
+              id="i-external"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentcolor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <path
+                d="M14 9 L3 9 3 29 23 29 23 18 M18 4 L28 4 28 14 M28 4 L14 18"
+              />
+            </svg>
+          </div>
+        </a>
+      </div>
     `;
   }
 

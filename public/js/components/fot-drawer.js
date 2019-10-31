@@ -29,15 +29,16 @@ class FotDrawer extends LitElement {
         align-items: stretch;
       }
 
-      h2 {
-        padding-left: 16px;
-      }
-
       #bottom-container {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         align-items: stretch;
+      }
+
+      .padded {
+        padding-left: 16px;
+        padding-right: 16px;
       }
 
       .sxs {
@@ -51,17 +52,38 @@ class FotDrawer extends LitElement {
         transform: translateY(4px);
       }
 
+      .button-link {
+        text-decoration: none;
+        padding: 9px 18px;
+        color: inherit;
+      }
+
+      .button-link:hover {
+        transform: scale(1.03);
+      }
+
       .button {
         display: inline-block;
-        background: var(--accent-color);
         color: white;
         text-align: center;
         padding: 15px 45px;
-        margin-bottom: 50px;
+        text-decoration: none;
       }
 
       /* TODO - some indicator on hover */
       .button:hover {
+        background: var(--accent-color);
+      }
+
+      .list-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .list-button > :first-child {
+        margin-right: 1em;
       }
     `;
   }
@@ -74,10 +96,9 @@ class FotDrawer extends LitElement {
   render() {
     return html`
       <div id="top-container">
-        <div class="sxs">
-          <h2>Focus On This</h2>
-          <!-- TODO - svg should be wrapped in a button for a11y -->
-          <div class="icon-button">
+        <div class="sxs padded">
+          <a class="button-link" href="./"><h2>Focus On This</h2></a>
+          <div class="icon-button" role="button">
             <svg
               @click="${this.handleCloseClick}"
               class="i-close"
@@ -94,7 +115,26 @@ class FotDrawer extends LitElement {
             </svg>
           </div>
         </div>
-        <a class="button" role="button" href="./about">About</a>
+        <a class="button" role="button" href="./about"
+          ><div class="list-button">
+            <svg
+              id="i-info"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              width="32"
+              height="32"
+              fill="none"
+              stroke="currentcolor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <path d="M16 14 L16 23 M16 8 L16 10" />
+              <circle cx="16" cy="16" r="14" />
+            </svg>
+            <span>About</span>
+          </div>
+        </a>
       </div>
       <div id="bottom-container"></div>
     `;

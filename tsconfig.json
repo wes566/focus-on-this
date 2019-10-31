@@ -1,40 +1,11 @@
 {
   "compilerOptions": {
-    "outDir": "build/dist",
-    "module": "esnext",
-    "target": "es5",
-    "lib": ["es6", "dom", "esnext.asynciterable"],
-    "sourceMap": true,
-    "allowJs": true,
-    "jsx": "react",
+    "target": "es2015",
     "moduleResolution": "node",
-    "rootDir": "./",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": false,
-    "noImplicitAny": false,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "baseUrl": "./",
-    "paths": {
-      "components": ["src/components"],
-      "*": ["src/*"]
-    },
-    "plugins": [
-      {
-        "name": "typescript-styled-plugin"
-      }
-    ]
+    "strict": true,
+    "allowJs": true,
+    "checkJs": true
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts",
-    "deps"
-  ]
+  "include": ["public"],
+  "exclude": ["node_modules"]
 }

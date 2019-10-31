@@ -1,5 +1,0 @@
-{
-    "parser": "typescript",
-    "jsxBracketSameLine": true,
-    "printWidth": 150
-}

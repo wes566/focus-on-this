@@ -13,13 +13,11 @@
     "webDependencies": [
       "lit-html",
       "lit-element",
-      "@material/mwc-button",
       "@material/mwc-fab",
       "side-drawer"
     ]
   },
   "dependencies": {
-    "@material/mwc-button": "^0.10.0",
     "@material/mwc-fab": "^0.10.0",
     "lit-element": "^2.2.1",
     "lit-html": "^1.1.2",

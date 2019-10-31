@@ -5,35 +5,13 @@
 
 import { LitElement, html, css } from "../../web_modules/lit-element.js";
 import "../../web_modules/side-drawer.js";
+
 import "../../web_modules/@material/mwc-fab.js";
 
 import "../components/fot-drawer.js";
 
-const FOCUS_ITEM_KEY = "focusitem";
-
 /** @extends {LitElement} */
-class FotApp extends LitElement {
-  constructor() {
-    super();
-
-    /** @property {string} inputValue */
-    this.inputValue = "";
-
-    /** @property {boolean} isLoading */
-    this.isLoading = true;
-
-    /** @property {string} focusItem */
-    this.focusItem = "";
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-
-    // TODO - move to kv storage and promises!
-    this.focusItem = localStorage.getItem(FOCUS_ITEM_KEY) || "";
-    this.isLoading = false;
-  }
-
+class FotAbout extends LitElement {
   static get styles() {
     return css`
       :host {
@@ -41,101 +19,26 @@ class FotApp extends LitElement {
         background-color: var(--primary-bg-color);
         height: 100%;
         width: 100%;
-        overflow: hidden;
-        position: fixed;
         display: flex;
         flex-direction: column;
         align-items: stretch;
         justify-content: space-between;
         flex: 1;
-
-        --body-padding: 80px 20px 20px 20px;
       }
 
-      @keyframes fadein {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+      main {
+        max-width: 500px;
+        padding: 32px 50px 0 50px;
       }
 
-      @keyframes fadeout {
-        from {
-          opacity: 1;
-        }
-        to {
-          opacity: 0;
-        }
-      }
-
-      .fade-out {
-        visibility: hidden;
-        animation-name: fadeout;
-        animation-duration: 1s;
-      }
-
-      .fade-in {
-        visibility: visible;
-        animation-name: fadein;
-        animation-duration: 2s;
-      }
-
-      .input-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: var(--body-padding);
-      }
-
-      .info-container {
-        width: 100%;
-        font-size: 24px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-      }
-
-      .hint-text {
-        font-size: 16px;
-        color: #fafafa77;
-        cursor: default;
-        animation-duration: 5s;
-      }
-
-      .focus-item-container {
-        display: flex;
-        justify-content: center;
-        padding: var(--body-padding);
-        font-size: 24px;
-        cursor: default;
+      li {
+        margin-bottom: 12px;
       }
 
       .footer {
         display: flex;
         justify-content: space-between;
         padding: 20px;
-      }
-
-      input {
-        padding: 0.5em;
-        text-align: center;
-        min-width: 50%;
-        margin: 2em;
-        border: none;
-        border-radius: 3px;
-        border-bottom-width: 0;
-        padding: 10px;
-        font-size: 24px;
-      }
-
-      .centered-label {
-        cursor: default;
-        text-align: center;
       }
 
       mwc-fab {
@@ -147,76 +50,43 @@ class FotApp extends LitElement {
     `;
   }
 
-  /** @returns {import("lit-element").PropertyDeclarations} */
-  static get properties() {
-    return {
-      focusItem: { type: String },
-      inputValue: {
-        type: String,
-        hasChanged(newVal, oldVal) {
-          const isOldEmpty = !oldVal;
-          const isNewEmpty = !newVal;
-          return isOldEmpty !== isNewEmpty;
-        }
-      }
-    };
-  }
-
   render() {
-    let body = this.inputTemplate;
-    if (this.isLoading) {
-      body = this.loadingTemplate;
-    }
-
-    if (!!this.focusItem) {
-      body = this.showFocusItemTemplate;
-    }
-
     return html`
-      ${body} ${this.footerTemplate}
+      <main>
+        <h1>About</h1>
+        <p>
+          Hi, I'm Wes. I made this simple app because sometimes I need to focus
+          on just one thing, and it helps to have that thing written down and
+          sitting on my phone screen. When I unlock my phone it's the first
+          thing I see and that reminds me of what I'm trying to focus on. And
+          so, I wrote this simple app.
+        </p>
+
+        <h2>Tips For Use</h2>
+        <ul>
+          <li>
+            Add this site to your home screen, it will act like a native app
+            (home screen icon, works offline, fast).
+          </li>
+          <li>
+            Make this your browser start page, so every time you open a new
+            browser window you can have a reminder of what you are focusing on.
+          </li>
+          <li>
+            If you are in a meeting, pull this site up and put in the purpose of
+            your meeting... if any discussion in the meeting does not pertain to
+            what is on the screen then point to the screen and yell gently
+            remind folks to stay on topic... if your meeting doesn't have a
+            simple purpose that you can capture in a short sentence then cancel
+            your meeting :)
+          </li>
+        </ul>
+      </main>
+      ${this.footerTemplate}
     `;
   }
 
-  get hasFocusItem() {
-    return !!this.focusItem;
-  }
-
-  get loadingTemplate() {
-    return html`
-      <div>Loading...</div>
-    `;
-  }
-
-  get inputTemplate() {
-    return html`
-      <div class="input-container">
-        <div class="info-container">
-          <p class="centered-label">
-            What one thing do you want to focus on right now?
-          </p>
-          <input id="focusItemInput" @keyup="${this.handleKeyUp}" autofocus />
-          <mwc-fab
-            class="${this.hasText ? "fade-in" : "fade-out"}"
-            icon="arrow_forward"
-            @click="${this.handleFocusItemSubmit}"
-          ></mwc-fab>
-          <p
-            class="${this.hasText ? "hint-text fade-in" : "hint-text fade-out"}"
-          >
-            or press Enter
-          </p>
-        </div>
-      </div>
-    `;
-  }
-
-  get showFocusItemTemplate() {
-    return html`
-      <div></div>
-      <div class="focus-item-container">${this.focusItem}</div>
-    `;
-  }
-
+  // TODO: this can and should be shared across pages yo
   get footerTemplate() {
     return html`
       <div>
@@ -226,11 +96,6 @@ class FotApp extends LitElement {
             icon="menu"
             @click="${this.handleMenuClick}"
           ></mwc-fab>
-          <mwc-fab
-            class="${!!this.focusItem ? "fade-in" : "fade-out"}"
-            icon="done"
-            @click="${this.handleFocusItemDone}"
-          ></mwc-fab>
         </div>
         <side-drawer id="drawer"
           ><fot-drawer @on-close="${this.handleDrawerClosed}"></fot-drawer
@@ -238,21 +103,6 @@ class FotApp extends LitElement {
       </div>
     `;
   }
-
-  // TODO - refocus the input box after a focus item is complete
-  // /**
-  //  *
-  //  * @param {{[s:string]: any}} changedProperties
-  //  */
-  // updated(changedProperties) {
-  //   if ("focusItem" in changedProperties) {
-  //     const inputElement =
-  //       this.shadowRoot && this.shadowRoot.getElementById("focusItemInput");
-  //     if (!!inputElement) {
-  //       inputElement.focus();
-  //     }
-  //   }
-  // }
 
   /**
    * @param {Event} e
@@ -269,40 +119,6 @@ class FotApp extends LitElement {
   /**
    * @param {Event} e
    */
-  handleFocusItemDone(e) {
-    localStorage.removeItem(FOCUS_ITEM_KEY);
-    this.focusItem = "";
-    this.inputValue = "";
-  }
-
-  /**
-   * @param {Event} e
-   */
-  handleFocusItemSubmit(e) {
-    if (!this.inputValue) {
-      return;
-    }
-
-    localStorage.setItem(FOCUS_ITEM_KEY, this.inputValue);
-
-    this.focusItem = this.inputValue;
-    this.inputValue = "";
-  }
-
-  /**
-   * @param {KeyboardEvent} e
-   */
-  handleKeyUp(e) {
-    if (e.keyCode === 13) {
-      this.handleFocusItemSubmit(e);
-    } else if (e.target !== null) {
-      this.inputValue = /** @type {HTMLInputElement} */ (e.target).value;
-    }
-  }
-
-  /**
-   * @param {Event} e
-   */
   handleDrawerClosed(e) {
     const drawer =
       /** @type {SideDrawer | null} */ (this.shadowRoot &&
@@ -311,10 +127,6 @@ class FotApp extends LitElement {
       drawer.open = false;
     }
   }
-
-  get hasText() {
-    return !!this.inputValue;
-  }
 }
 
-customElements.define("fot-app", FotApp);
+customElements.define("fot-about", FotAbout);

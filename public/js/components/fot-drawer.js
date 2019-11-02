@@ -96,7 +96,7 @@ class FotDrawer extends LitElement {
     return html`
       <div id="top-container">
         <div class="sxs padded">
-          <a class="button-link" href="./"><h2>Focus On This</h2></a>
+          <a class="button-link" href="/"><h2>Focus On This</h2></a>
           <div class="icon-button" role="button">
             <svg
               @click="${this.handleCloseClick}"
@@ -114,7 +114,7 @@ class FotDrawer extends LitElement {
             </svg>
           </div>
         </div>
-        <a class="button" role="button" href="./about"
+        <a class="button" role="button" href="/about"
           ><div class="list-button">
             <svg
               id="i-info"

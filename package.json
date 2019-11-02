@@ -21,7 +21,7 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "precommit": "lint-staged",
-    "predeploy": "yarn build"
+    "prepare": "yarn build"
   },
   "lint-staged": {
     "*.ts": [

@@ -5,6 +5,9 @@
   "main": "public/js/index.js",
   "scripts": {
     "prepare": "pika-web --clean --strict --dest public/web_modules/",
+    "build": "npm run pika:prod && npm run check && npm run minify",
+    "pika:prod": "pika-web --clean --strict --optimize --dest public/web_modules/",
+    "minify": "terser",
     "check": "tsc"
   },
   "author": "Wes Peter",
@@ -25,6 +28,7 @@
   },
   "devDependencies": {
     "@pika/web": "^0.6.1",
-    "typescript": "^3.6.4"
+    "terser": "^4.4.0",
+    "typescript": "^3.7.2"
   }
 }
